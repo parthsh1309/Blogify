@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Navbar/>
-      <main>
+      <main className="w-full h-full mt-12">
         <Outlet/>
       </main>
       <Footer/>
