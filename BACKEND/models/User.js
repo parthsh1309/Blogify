@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import dbConnection from "./config/database";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const { Schema } = mongoose;
 
@@ -12,11 +12,13 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
-  password: {
-    type: String,
-    required: true,
-  },
+  // password: {
+  //   type: String,
+  //   required: true,
+  // },
 });
+
+userSchema.plugin(passportLocalMongoose);
 const User = mongoose.model("user", userSchema);
 
-export default User
+export default User;
