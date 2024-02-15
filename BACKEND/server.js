@@ -39,8 +39,10 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 import signup from "./routes/signup.js";
+import login from "./routes/login.js";
 
 app.use("/api", signup);
+app.use("/api",login );
 
 const PORT = process.env.PORT || "3000";
 app.listen(PORT, () => {
