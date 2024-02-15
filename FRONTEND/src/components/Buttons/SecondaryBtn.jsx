@@ -9,7 +9,7 @@ function SecondaryBtn({
   return (
     <button
       type={type}
-      className={`${className} text-white bg-${backgroundColor}-100  hover:bg-${backgroundColor}-800 focus:ring-4 focus:outline-none focus:ring-${backgroundColor}-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-${backgroundColor}-600 dark:hover:bg-${backgroundColor}-700 dark:focus:ring-${backgroundColor}-800`}
+      className={`${className} text-white bg-${backgroundColor}-700  hover:bg-${backgroundColor}-800 focus:ring-4 focus:outline-none focus:ring-${backgroundColor}-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-${backgroundColor}-600 dark:hover:bg-${backgroundColor}-700 dark:focus:ring-${backgroundColor}-800`}
     >
       {children}
       <svg
