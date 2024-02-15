@@ -7,6 +7,7 @@ import Footer from "./Footer/Footer";
 import Navbar from "./Header/Navbar";
 import ThemeSwitch from "./Header/ThemeSwitch";
 import FloatingInput from "./Inputs/FloatingInput";
+import Logo from "./Logo";
 
 export {
   PrimaryBtn,
@@ -18,4 +19,6 @@ export {
   SecondaryBtn,
   LoginComponent,
   SignupComponent,
+  Logo,
+  
 };
