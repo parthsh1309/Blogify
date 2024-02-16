@@ -4,7 +4,7 @@ import { themeSwitch } from "../../features/themeSwitch";
 
 function ThemeSwitch({className}) {
   const dispatch = useDispatch();
-  const isDark = useSelector((state) => state.isDark);
+  const isDark = useSelector((state) => state.theme.isDark);
 
   const themeSwitchBtn = () => {
     dispatch(themeSwitch());
