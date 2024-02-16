@@ -9,7 +9,7 @@ export class AuthService {
 
   async createAccount({ username, password, email }) {
     try {
-      const response = axios.post(`${this.databaseUrl}/v1/register`, {
+      const response = await axios.post(`${this.databaseUrl}/v1/register`, {
         username,
         email,
         password,
@@ -23,7 +23,7 @@ export class AuthService {
 
   async login({ password, email }) {
     try {
-      const response = axios.post(`${this.databaseUrl}/v1/login`, {
+      const response = await axios.post(`${this.databaseUrl}/v1/login`, {
         email,
         password,
       });
@@ -39,14 +39,14 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const response = axios.post(`${this.databaseUrl}/v1/getCurrentUser`);
+      const response = await axios.get(`http://localhost:3000/api/v1/getCurrentUser`);
 
+      console.log('response');
       if (response) {
-        return response.data;
+        return response;
       }
-      throw new error("Something Went Wrong");
     } catch (error) {
-      console.log(`authService :: CreateAccount :: ${error}`);
+      console.log(`authService :: currentUser :: ${error}`);
     }
   }
 }
