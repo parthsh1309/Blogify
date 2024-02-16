@@ -40,9 +40,11 @@ passport.deserializeUser(User.deserializeUser());
 
 import signup from "./routes/signup.js";
 import login from "./routes/login.js";
+import currentUser from "./routes/currentUser.js";
 
-app.use("/api", signup);
-app.use("/api",login );
+app.use("/api/v1", signup);
+app.use("/api/v1",login );
+app.use("/api/v1",currentUser );
 
 const PORT = process.env.PORT || "3000";
 app.listen(PORT, () => {

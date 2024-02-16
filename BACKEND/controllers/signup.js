@@ -8,7 +8,7 @@ const createUser = async (req, res) => {
     email,
   });
   const registeredUser = await User.register(user, password);
-  return registeredUser;
+  return true;
 };
 
 export default asyncHandler(createUser);

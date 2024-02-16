@@ -2,13 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../models/User.js";
 
 const currentUser = async (req, res) => {
-  const { username, email, password } = req.body;
-  let user = new User({
-    username,
-    email,
-  });
-  const registeredUser = await User.register(user, password);
-  return registeredUser;
+  return req.user
 };
 
 export default asyncHandler(currentUser);

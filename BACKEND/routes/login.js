@@ -1,4 +1,5 @@
 import express from "express";
+import passport from "passport";
 const router = express.Router();
 
 router.post(
@@ -7,7 +8,9 @@ router.post(
     successRedirect: "/",
     failureRedirect: "/signup",
   }),
-  (req, res) => {}
+  (req, res) => {
+    return true
+  }
 );
 
 export default router;
