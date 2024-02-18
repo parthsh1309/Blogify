@@ -1,7 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FloatingInput, Logo, SecondaryBtn } from "../index";
 import GoogleBtn from "./GoogleBtn";
-import TwitterBtn from "./TwitterBtn";
 
 function Login() {
   return (
@@ -23,8 +23,10 @@ function Login() {
         <span className="dark:text-slate-400 self-center text-lg ">--or Login With--</span>
         <div className="w-full">
           <GoogleBtn/>
-          <TwitterBtn/>
         </div>
+        <span className="dark:text-slate-400 self-center text- ">
+          Don't have an Account? <Link className="text-blue-600 hover:underline" to={'/signup'}>Signup</Link>
+        </span>
       </div>
     </div>
   );

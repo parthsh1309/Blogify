@@ -2,14 +2,14 @@ import express from "express";
 import session from "express-session";
 import cors from "cors";
 import dotenv from "dotenv";
-import passport from "passport";
-import localStratergy from "passport-local";
 
 import db from "./config/database.js";
 import User from "./models/User.js";
 
 const app = express();
 dotenv.config({ path: "./config/.env" });
+
+app.use(express.json())
 
 const corsOption = {
   origin: "http://localhost:5173",
@@ -30,13 +30,6 @@ const sessionConfig = {
 };
 
 app.use(session(sessionConfig));
-
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new localStratergy(User.authenticate()));
-
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 import signup from "./routes/signup.js";
 import login from "./routes/login.js";

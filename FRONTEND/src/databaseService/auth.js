@@ -9,7 +9,7 @@ export class AuthService {
 
   async createAccount({ username, password, email }) {
     try {
-      const response = await axios.post(`${this.databaseUrl}/v1/register`, {
+      const response = await axios.post(`http://localhost:3000/api/v1/register`, {
         username,
         email,
         password,
@@ -33,7 +33,7 @@ export class AuthService {
       }
       throw new error("Something Went Wrong");
     } catch (error) {
-      console.log(`authService :: CreateAccount :: ${error}`);
+      console.log(`authService :: login :: ${error}`);
     }
   }
 
