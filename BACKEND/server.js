@@ -2,6 +2,7 @@ import express from "express";
 import session from "express-session";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import db from "./config/database.js";
 import User from "./models/User.js";
@@ -9,7 +10,9 @@ import User from "./models/User.js";
 const app = express();
 dotenv.config({ path: "./config/.env" });
 
-app.use(express.json())
+app.use(express.json({ limit: "18kb" }));
+app.use(express.urlencoded({ extended: true, limit: "18kb" }));
+app.use(cookieParser());
 
 const corsOption = {
   origin: "http://localhost:5173",
@@ -35,9 +38,10 @@ import signup from "./routes/auth/signup.js";
 import login from "./routes/auth/login.js";
 import currentUser from "./routes/auth/currentUser.js";
 
-app.use("/api/v1/", signup);
-app.use("/api/v1/",login );
-app.use("/api/v1/",currentUser );
+// auth apis
+app.use("/auth/api/v1/", signup);
+app.use("/auth/api/v1/", login);
+app.use("/auth/api/v1/", currentUser);
 
 const PORT = process.env.PORT || "3000";
 app.listen(PORT, () => {

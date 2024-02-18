@@ -15,7 +15,7 @@ const createUser = async (req, res) => {
     if (existingUser) {
       return res
         .status(200)
-        .json(new ApiResponse(200, {}, "User Already Exists"));
+        .json(new ApiResponse(409, {}, "User Already Exists"));
     }
   
     // if user dont exists
@@ -26,14 +26,14 @@ const createUser = async (req, res) => {
       password,
     });
 
-    console.log(user);
     // get the user from the database
-    const createdUser = await User.findById(user._id);
+    const createdUser = await User.findById(user._id).select("-password");
   
     // return the response
     return res
       .status(200)
-      .json(new ApiResponse(200, createdUser, "User Registeres Successfully"));
+      .json(new ApiResponse(200, createdUser, "User Registered Successfully"));
+
   } catch (error) {
     return new ApiError(500,"Unable to registered the user",error)
   }
