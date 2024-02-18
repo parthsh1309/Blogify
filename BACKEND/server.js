@@ -31,9 +31,9 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-import signup from "./routes/signup.js";
-import login from "./routes/login.js";
-import currentUser from "./routes/currentUser.js";
+import signup from "./routes/auth/signup.js";
+import login from "./routes/auth/login.js";
+import currentUser from "./routes/auth/currentUser.js";
 
 app.use("/api/v1/", signup);
 app.use("/api/v1/",login );
