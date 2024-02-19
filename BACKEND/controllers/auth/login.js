@@ -2,7 +2,7 @@ import asyncHandler from "express-async-handler";
 import User from "../../models/User.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
 import { ApiError } from "../../utils/apiError.js";
-import { createAccessRefreshToken } from "../../utils/access-refreshToken.js";
+import { createAccessRefreshToken } from "../../utils/createTokens.js";
 
 const loginUser = async (req, res) => {
   try {

@@ -4,6 +4,7 @@ const createAccessRefreshToken = async (userId) => {
   try {
     // finding the user
     const user = await User.findById(userId);
+
     // creating the access and refresh token from the methods created in model
     const accessToken = user.generateAccessToken();
     const refreshToken = user.generateRefreshToken();

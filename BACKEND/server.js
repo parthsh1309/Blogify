@@ -38,12 +38,14 @@ import signup from "./routes/auth/signup.js";
 import login from "./routes/auth/login.js";
 import logout from "./routes/auth/logout.js";
 import currentUser from "./routes/auth/currentUser.js";
+import refreshAccessToken from "./routes/auth/refreshAccessToken.js";
 
 // auth apis
 app.use("/auth/api/v1/", signup);
 app.use("/auth/api/v1/", login);
 app.use("/auth/api/v1/", logout);
 app.use("/auth/api/v1/", currentUser);
+app.use("/auth/api/v1/", refreshAccessToken);
 
 const PORT = process.env.PORT || "3000";
 app.listen(PORT, () => {
