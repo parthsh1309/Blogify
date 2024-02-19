@@ -4,6 +4,7 @@ import { ApiError } from "../../utils/apiError.js";
 import { uploadCloudinaryFile } from "../../utils/cloudinary.js";
 import Blog from "../../models/blog.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
+import User from "../../models/User.js";
 
 const createBlog = async (req, res) => {
   try {
@@ -13,7 +14,8 @@ const createBlog = async (req, res) => {
     }
     // get data from body
     const { title, text, inProduction } = req.body;
-    console.log("hhhe");
+
+    // TODO: Add cover image here from req.files
     const coverImgUrl =
       "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
 
@@ -24,8 +26,6 @@ const createBlog = async (req, res) => {
 
     // Upload image to cloudinary
     const coverImg = await uploadCloudinaryFile(coverImgUrl);
-
-    console.log(coverImg);
 
     // if image is not uploaded
     if (!coverImg) {
@@ -41,6 +41,13 @@ const createBlog = async (req, res) => {
       coverImage: { url: coverImg.url, publicId: coverImg.public_id },
       uuid: uuidv4(),
     });
+
+    // saving the blog reference to user
+
+    await User.findByIdAndUpdate(
+      { _id: req.user._id },
+      { $push: { blogPosts: blog._id } }
+    );
 
     // return the response
     return res

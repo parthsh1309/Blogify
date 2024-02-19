@@ -19,14 +19,14 @@ const userSchema = new Schema({
   },
   blogPosts: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: "blogs",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "blog",
     },
   ],
   savedBlogs: [
     {
-      type: mongoose.Schema.ObjectId,
-      ref: "blogs",
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "blog",
     },
   ],
   likedBlogs: [

@@ -10,7 +10,13 @@ const displayAllBlogs = async (req, res) => {
       inProduction: req.query.inProduction || false,
     })
       .limit(req.query.limit || 10)
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .populate({
+        path: "author",
+        select: "-password -refreshToken -likedBlogs -savedBlogs -blogPosts"
+      })
+      .populate("comments")
+      .exec();
 
     // if there are no blogs
     if (!blogs || blogs.length === 0) {
@@ -22,7 +28,10 @@ const displayAllBlogs = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, blogs, "Successfully fetched all the blogs"));
   } catch (error) {
-    throw new ApiError(error.status||501, error.message || "Something went wrong");
+    throw new ApiError(
+      error.status || 501,
+      error.message || "Something went wrong"
+    );
   }
 };
 
