@@ -13,8 +13,9 @@ const createBlog = async (req, res) => {
     }
     // get data from body
     const { title, text, inProduction } = req.body;
-    console.log('hhhe');
-    const coverImgUrl = "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
+    console.log("hhhe");
+    const coverImgUrl =
+      "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
 
     // if there's no cover image
     if (!coverImgUrl) {
@@ -33,14 +34,13 @@ const createBlog = async (req, res) => {
 
     // save the data to database
     const blog = await Blog.create({
-        author: req.user._id,
+      author: req.user._id,
       title,
       text,
       inProduction,
-      coverImage:coverImg.url,
+      coverImage: { url: coverImg.url, publicId: coverImg.public_id },
       uuid: uuidv4(),
     });
-
 
     // return the response
     return res

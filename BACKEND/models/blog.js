@@ -13,8 +13,14 @@ const blogSchema = new Schema(
       required: true,
     },
     coverImage: {
-      type: String,
-      required: true,
+      publicId:{
+        type: String,
+        required: true
+      },
+      url: {
+        type: String,
+        required: true,
+      }
     },
     text: {
       type: String,
@@ -45,7 +51,6 @@ const blogSchema = new Schema(
     timestamps: true,
   }
 );
-
 
 const Blog = mongoose.model("blog", blogSchema);
 
