@@ -17,6 +17,24 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  blogPosts: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "blogs",
+    },
+  ],
+  savedBlogs: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "blogs",
+    },
+  ],
+  likedBlogs: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "blogs",
+    },
+  ],
   refreshToken: {
     type: String,
   },
