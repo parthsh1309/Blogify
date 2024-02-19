@@ -4,6 +4,7 @@ import { ApiError } from "../../utils/apiError.js";
 import User from "../../models/User.js";
 import {createAccessRefreshToken} from "../../utils/createTokens.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
+import {options} from "../../utils/cookiesOption.js";
 
 const refreshAccess = async (req, res) => {
   // getting refresh token from cookies
@@ -33,11 +34,6 @@ const refreshAccess = async (req, res) => {
       );
     }
 
-    const options = {
-      httpOnly: true,
-      secure: true,
-    };
-
     // creating new tokens
     const { accessToken, refreshToken } = await createAccessRefreshToken(user._id);
 
@@ -45,8 +41,8 @@ const refreshAccess = async (req, res) => {
     // sending access and refresh token through cookies
     return res
       .status(200)
-      .cookie("accessToken", accessToken, options)
-      .cookie("refreshToken", refreshToken, options)
+      .cookie("accessToken", accessToken, options.accessToken)
+      .cookie("refreshToken", refreshToken, options.refreshToken)
       .json(
         new ApiResponse(
           200,
