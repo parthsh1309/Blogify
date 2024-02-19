@@ -4,11 +4,15 @@ const { Schema } = mongoose;
 
 const blogSchema = new Schema(
   {
+    uuid: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
     },
-    image: {
+    coverImage: {
       type: String,
       required: true,
     },
@@ -32,6 +36,10 @@ const blogSchema = new Schema(
         ref: "comments",
       },
     ],
+    inProduction: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,

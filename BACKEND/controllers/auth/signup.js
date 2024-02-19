@@ -7,7 +7,9 @@ const createUser = async (req, res) => {
   try {
     // get details from body
     const { username, email, password } = req.body;
-
+    if(!username || !email || !password){
+      throw new ApiError(400,"All fields are mandatory");
+    }
     // check if the users exist in database
     const existingUser = await User.findOne({ email: email });
   
