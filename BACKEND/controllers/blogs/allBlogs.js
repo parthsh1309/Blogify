@@ -15,7 +15,6 @@ const displayAllBlogs = async (req, res) => {
         path: "author",
         select: "-password -refreshToken -likedBlogs -savedBlogs -blogPosts"
       })
-      .populate("comments")
       .exec();
 
     // if there are no blogs
