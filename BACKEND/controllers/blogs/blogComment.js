@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import { v4 as uuidv4 } from "uuid";
 import { ApiError } from "../../utils/apiError.js";
 import Blog from "../../models/blog.js";
 import Comments from "../../models/comments.js";
@@ -25,6 +26,7 @@ const blogComment = async (req, res) => {
 
     // save the data to database
     const comment = await Comments.create({
+      uuid:uuidv4(),
       content,
       author: req.user._id,
       blog: blog._id,

@@ -8,6 +8,7 @@ import displaySingleBlog from "../../controllers/blogs/singleBlog.js";
 import deleteBlog from "../../controllers/blogs/deleteBlog.js";
 import blogComment from "../../controllers/blogs/blogComment.js";
 import likeBlog from "../../controllers/blogs/likeBlog.js";
+import deleteBlogComment from "../../controllers/blogs/deleteComment.js";
 
 const router = express.Router();
 
@@ -21,8 +22,8 @@ router.delete("/delete-blog/:blogId", verifyJWT, deleteBlog);
 
 router.post("/blog-comment/:blogId", verifyJWT, blogComment);
 
+router.delete("/delete-comment/:commentId", verifyJWT, deleteBlogComment);
+
 router.post("/like-blog/:blogId", verifyJWT, likeBlog);
-
-
 
 export default router;

@@ -4,6 +4,10 @@ const { Schema } = mongoose;
 
 const commentSchema = new Schema(
   {
+    uuid:{
+        type:String,
+        required:true
+    },
     content:{
         type:String,
         required:true
