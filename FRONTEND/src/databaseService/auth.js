@@ -23,7 +23,6 @@ export class AuthService {
 
   async login({ password, email }) {
     try {
-      console.log(password, email);
       const response = await axios.post(`${this.databaseUrl}auth/api/v1/login`, {
         email,
         password,
@@ -46,6 +45,19 @@ export class AuthService {
       }
     } catch (error) {
       console.log(`authService :: currentUser :: ${error.response.data.error}`);
+      return false;
+    }
+  }
+
+  async logout() {
+    try {
+      const response = await axios.post(`${this.databaseUrl}auth/api/v1/logout`,{withCredentials: true});
+      if(response){
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error.response);
+      console.log(`authService :: logout :: ${error.response.data.error}`);
       return false;
     }
   }

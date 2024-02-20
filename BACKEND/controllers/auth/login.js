@@ -6,7 +6,6 @@ import { createAccessRefreshToken } from "../../utils/createTokens.js";
 import {options} from "../../utils/cookiesOption.js";
 const loginUser = async (req, res) => {
   try {
-    console.log(req.body);
     const { email, password } = req.body;
     const user = await User.findOne({ email: email });
 

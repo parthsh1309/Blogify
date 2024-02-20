@@ -1,16 +1,19 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, Navigate, redirect } from "react-router-dom";
 import { FloatingInput, Logo, SecondaryBtn } from "../index";
 import GoogleBtn from "./GoogleBtn";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import authService from "../../databaseService/Auth";
 import { login } from "../../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const [error, setError] = useState(null);
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.auth.status);
 
   const submitForm = async (data) => {
     try {
@@ -25,13 +28,19 @@ function Login() {
         if (!userData) return setError("Userdata not found");
         // store the user info to store
         dispatch(login(userData));
-        
         navigate("/");
+        
       }
     } catch (error) {
       setError(error.message);
     }
   };
+
+  useEffect(() => {
+    if(authStatus === true) {
+      navigate("/");
+    }
+  }, []);
   return (
     <div className="w-full h-full flex items-center justify-center p-3">
       <div className="w-full h-auto p-5 flex flex-col gap-4 justify-center md:w-1/3 border border-black dark:border-white rounded-2xl bg-slate-400/20 dark:bg-transparent">

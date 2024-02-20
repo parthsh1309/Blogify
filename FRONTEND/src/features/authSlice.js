@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Navigate } from "react-router-dom";
 
 export const initialState = {
   userData: null,
