@@ -4,7 +4,7 @@ import { Container } from "../components";
 function Home() {
   return (
     <Container>
-      <div>Home</div>
+      <div className="text-white">Home</div>
     </Container>
   );
 }

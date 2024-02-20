@@ -9,11 +9,11 @@ export class AuthService {
 
   async createAccount({ username, password, email }) {
     try {
-      const response = await axios.post(`http://localhost:3000/api/v1/register`, {
+      const response = await axios.post(`${this.databaseUrl}auth/api/v1/register`, {
         username,
         email,
         password,
-      });
+      },{withCredentials: true});
 
       return response.data;
     } catch (error) {
@@ -23,7 +23,8 @@ export class AuthService {
 
   async login({ password, email }) {
     try {
-      const response = await axios.post(`${this.databaseUrl}/v1/login`, {
+      console.log(password, email);
+      const response = await axios.post(`${this.databaseUrl}auth/api/v1/login`, {
         email,
         password,
       });
@@ -39,14 +40,13 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const response = await axios.get(`http://localhost:3000/api/v1/getCurrentUser`);
-
-      console.log('response');
+      const response = await axios.get(`${this.databaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true});
       if (response) {
-        return response;
+        return response.data;
       }
     } catch (error) {
-      console.log(`authService :: currentUser :: ${error}`);
+      console.log(`authService :: currentUser :: ${error.response.data.error}`);
+      return false;
     }
   }
 }

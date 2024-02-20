@@ -3,12 +3,12 @@ import jwt from "jsonwebtoken";
 import { ApiError } from "../utils/apiError.js";
 import User from "../models/User.js";
 
-const verifyJWT = asyncHandler(async (req, _, next) => {
+const verifyJWT = asyncHandler(async (req, res, next) => {
   try {
     const token = req.cookies.accessToken;
     // if theres no token
     if (!token) {
-      throw new ApiError(401, "No Access token provided");
+      return res.status(401).json({ error: "Access token not found" });
     }
     // decode the token to get id of user
     const decodedToken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);

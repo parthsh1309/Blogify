@@ -16,16 +16,16 @@ function Signup() {
   const registerUser = async (data) => {
     setError("");
     try {
+      // creating the account
       const session = await authService.createAccount(data);
-      if (session) {
-        const session2 = await authService.login(session);
-        if (session2) {
-          const userData = await authService.getCurrentUser();
-          console.log(userData);
-          dispatch(login(userData));
-          navigate("/");
-        }
+      if (session.statusCode < 400) {
+        const userData = await authService.getCurrentUser();
+        if (!userData) return setError("Userdata not found");
+        console.log(userData);
+        dispatch(login(userData));
+        navigate("/");
       }
+      setError(session.message);
     } catch (error) {
       setError(error);
       console.log(error);
@@ -33,7 +33,7 @@ function Signup() {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center mt-2">
+    <div className="h-full flex justify-center items-center p-3">
       <div className="w-full h-auto p-5 flex flex-col gap-4 justify-center md:w-1/3 border border-black dark:border-white rounded-2xl bg-slate-300/20 dark:bg-transparent">
         {/* <Logo/> */}
 
@@ -49,19 +49,19 @@ function Signup() {
           <FloatingInput
             type="text"
             text="Username"
-            value="hehedssssdddhdhe"
+            value="test6"
             {...register("username", { required: true })}
           />
           <FloatingInput
             type="email"
             text="Email"
-            value="hehehhssddsde@dgmail"
+            value="test6@gmail.com"
             {...register("email", { required: true })}
           />
           <FloatingInput
             type="password"
             text="Password"
-            value="hhhddhhhdehe"
+            value="12345678"
             {...register("password", { required: true })}
           />
           <SecondaryBtn
@@ -75,7 +75,7 @@ function Signup() {
         <span className="dark:text-slate-400 self-center text-sm ">
           --or Login With--
         </span>
-        <div className="w-full">
+        <div className="w-full flex justify-center">
           <GoogleBtn />
         </div>
         <span className="dark:text-slate-400 self-center text- ">

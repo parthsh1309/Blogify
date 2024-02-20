@@ -2,9 +2,12 @@ import asyncHandler from "express-async-handler";
 import User from "../../models/User.js";
 import {ApiResponse} from "../../utils/apiResponse.js";
 import {ApiError} from "../../utils/apiError.js";
+import { createAccessRefreshToken } from "../../utils/createTokens.js";
+import { options } from "../../utils/cookiesOption.js";
 
 const createUser = async (req, res) => {
   try {
+    console.log(req.body);
     // get details from body
     const { username, email, password } = req.body;
     if(!username || !email || !password){
@@ -28,13 +31,31 @@ const createUser = async (req, res) => {
       password,
     });
 
+    const { accessToken, refreshToken } = await createAccessRefreshToken(
+      user._id
+    );
+
+
     // get the user from the database
-    const createdUser = await User.findById(user._id).select("-password");
-  
+    const createdUser = await User.findById(user._id).select("-password -refreshToken");
+
+    
     // return the response
     return res
       .status(200)
-      .json(new ApiResponse(200, createdUser, "User Registered Successfully"));
+      .cookie("accessToken", accessToken, options.accessToken)
+      .cookie("refreshToken", refreshToken, options.refreshToken)
+      .json(
+        new ApiResponse(
+          200,
+          {
+            user: createdUser,
+            accessToken,
+            refreshToken,
+          },
+          "Successfully Created The User"
+        )
+      );
 
   } catch (error) {
     return new ApiError(500,"Unable to registered the user",error)
