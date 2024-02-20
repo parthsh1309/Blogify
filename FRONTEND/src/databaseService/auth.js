@@ -27,10 +27,10 @@ export class AuthService {
       const response = await axios.post(`${this.databaseUrl}auth/api/v1/login`, {
         email,
         password,
-      });
+      },{withCredentials: true});
 
       if (response) {
-        return true;
+        return response;
       }
       throw new error("Something Went Wrong");
     } catch (error) {

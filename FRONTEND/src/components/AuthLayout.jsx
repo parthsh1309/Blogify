@@ -12,10 +12,6 @@ function Protected({ children, authentication = true }) {
     // If user is authenticated but authStatus is not updated, navigate to login page
     if (authentication && authStatus !== authentication) {
       navigate("/login");
-    } 
-    // If user is not authenticated but authStatus is not updated, navigate to home page
-    else if (!authentication && authStatus !== authentication) {
-      navigate("/");
     }
     setLoading(false);
   }, [navigate, authStatus, authentication]);

@@ -19,7 +19,7 @@ function Signup() {
       // creating the account
       const session = await authService.createAccount(data);
       // if account created successfully
-      if (session.statusCode < 400) {
+      if (session.success) {
         // get the current user and save it to store
         const userData = await authService.getCurrentUser();
 
