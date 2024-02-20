@@ -18,15 +18,13 @@ const router = createBrowserRouter(
     <Route
       path="/"
       element={
-        <Protected authentication={true}>
           <App />
-        </Protected>
       }
     >
       <Route
         path=""
         element={
-          <Protected authentication={true}>
+          <Protected authentication={false}>
             <Home />
           </Protected>
         }
@@ -34,7 +32,7 @@ const router = createBrowserRouter(
       <Route
         path="/about"
         element={
-          <Protected authentication={true}>
+          <Protected authentication={false}>
             <About />
           </Protected>
         }

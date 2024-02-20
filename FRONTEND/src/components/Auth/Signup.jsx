@@ -18,13 +18,19 @@ function Signup() {
     try {
       // creating the account
       const session = await authService.createAccount(data);
+      // if account created successfully
       if (session.statusCode < 400) {
+        // get the current user and save it to store
         const userData = await authService.getCurrentUser();
+
+        // if there's no current user
         if (!userData) return setError("Userdata not found");
-        console.log(userData);
+
+        // store the user info to store
         dispatch(login(userData));
         navigate("/");
       }
+
       setError(session.message);
     } catch (error) {
       setError(error);
@@ -49,19 +55,19 @@ function Signup() {
           <FloatingInput
             type="text"
             text="Username"
-            value="test6"
+            autoComplete="off"
             {...register("username", { required: true })}
           />
           <FloatingInput
             type="email"
             text="Email"
-            value="test6@gmail.com"
+            autoComplete="off"
             {...register("email", { required: true })}
           />
           <FloatingInput
             type="password"
             text="Password"
-            value="12345678"
+            autoComplete="off"
             {...register("password", { required: true })}
           />
           <SecondaryBtn

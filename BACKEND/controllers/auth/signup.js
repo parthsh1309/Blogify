@@ -20,7 +20,7 @@ const createUser = async (req, res) => {
     if (existingUser) {
       return res
         .status(200)
-        .json(new ApiResponse(409, {}, "User Already Exists"));
+        .json(new ApiResponse(409, {}, "User Already Exists Please Login using the credentials...."));
     }
   
     // if user dont exists
