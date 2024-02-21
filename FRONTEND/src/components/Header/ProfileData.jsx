@@ -2,14 +2,21 @@ import React from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import { useSelector } from "react-redux";
 import authService from "../../databaseService/Auth";
+import { useNavigate } from "react-router-dom";
 
 function ProfileData({ isProfileOpen }) {
   const auth = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
-  const logout = () => {
-    authService.logout();
+  const logout = async () => {
+    let res = await authService.logout();
+    if (res.success) {
+      console.log(res);
+      window.location.reload();      
+      return;
+    }
+    throw new Error(res.message);
   };
-
 
   const profileItem = [
     {
@@ -84,7 +91,7 @@ function ProfileData({ isProfileOpen }) {
             }  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white w-full`}
             onClick={logout}
           >
-            Signout
+            Logout
           </button>
         </li>
 

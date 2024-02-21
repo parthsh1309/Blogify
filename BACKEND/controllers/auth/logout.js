@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import { ApiError } from "../../utils/apiError.js";
 import User from "../../models/User.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
+import {options} from "../../utils/cookiesOption.js"
 
 const logout = async (req, res) => {
   try {
@@ -12,16 +13,11 @@ const logout = async (req, res) => {
     userData.refreshToken = null;
     userData.save();
 
-    const options = {
-        httpOnly : true,
-        secure: true
-    }
-
     // clearing the cookie and sending the response
     return res
       .status(200)
-      .clearCookie("accessToken",options)
-      .clearCookie("refreshToken",options)
+      .clearCookie("accessToken",options.accessToken)
+      .clearCookie("refreshToken",options.refreshToken)
       .json(new ApiResponse(200, {}, "Successfully Logged Out The User"))
       
   } catch (error) {

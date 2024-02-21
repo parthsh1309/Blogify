@@ -51,7 +51,7 @@ export class AuthService {
 
   async logout() {
     try {
-      const response = await axios.post(`${this.databaseUrl}auth/api/v1/logout`,{withCredentials: true});
+      const response = await axios.post(`${this.databaseUrl}auth/api/v1/logout`,{},{withCredentials: true});
       if(response){
         return response.data;
       }
