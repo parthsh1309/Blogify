@@ -1,10 +1,10 @@
 import React from "react";
-import { Container } from "../components";
+import { Container,Home as HomePage } from "../components";
 
 function Home() {
   return (
     <Container>
-      <div className="text-white">Home</div>
+     <HomePage/>
     </Container>
   );
 }

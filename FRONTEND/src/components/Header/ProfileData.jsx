@@ -1,18 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import { useSelector } from "react-redux";
 import authService from "../../databaseService/Auth";
-import { useNavigate } from "react-router-dom";
 
-function ProfileData({ isProfileOpen }) {
+function ProfileData({ isProfileOpen, closeProfile }) {
   const auth = useSelector((state) => state.auth);
-  const navigate = useNavigate();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (isProfileOpen) {
+        const dropdown = document.getElementById("profileDropdown");
+        if (dropdown && !dropdown.contains(event.target)) {
+          closeProfile();
+        }
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isProfileOpen, closeProfile]);
 
   const logout = async () => {
     let res = await authService.logout();
     if (res.success) {
       console.log(res);
-      window.location.reload();      
+      window.location.reload();
       return;
     }
     throw new Error(res.message);
@@ -47,6 +61,7 @@ function ProfileData({ isProfileOpen }) {
   ];
   return (
     <div
+      id="profileDropdown"
       className={`z-50 absolute right-5 top-16 w-36 ${
         isProfileOpen ? "block" : "hidden"
       } my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600`}
@@ -54,7 +69,8 @@ function ProfileData({ isProfileOpen }) {
       {auth.status ? (
         <div className="px-4 py-3">
           <span className="block text-base text-gray-900 dark:text-white">
-            {auth.userData.data.username}
+            {/* theres a glitch when we redirect the user to the home the username and email is being empty so we reload the page */}
+            {auth.userData.data.username|| window.location.reload()}
           </span>
           <span className="block text-sm text-gray-500 truncate dark:text-gray-400">
             {auth.userData.data.email}

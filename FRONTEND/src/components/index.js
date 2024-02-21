@@ -6,6 +6,7 @@ import Container from "./Container/Container";
 import Footer from "./Footer/Footer";
 import Navbar from "./Header/Navbar";
 import ThemeSwitch from "./Header/ThemeSwitch";
+import Home from "./Home/Home";
 import FloatingInput from "./Inputs/FloatingInput";
 import Logo from "./Logo";
 
@@ -20,5 +21,6 @@ export {
   LoginComponent,
   SignupComponent,
   Logo,
+  Home
   
 };
