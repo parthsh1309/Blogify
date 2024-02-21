@@ -33,7 +33,7 @@ function App() {
   return !loading ? (
     <>
       <Navbar />
-      <main className="w-full h-full pt-20">
+      <main className="w-full pt-20">
         <Outlet />
       </main>
       <Footer />

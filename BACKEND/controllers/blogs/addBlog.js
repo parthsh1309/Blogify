@@ -34,12 +34,13 @@ const createBlog = async (req, res) => {
 
     // save the data to database
     const blog = await Blog.create({
+      uuid: uuidv4(),
       author: req.user._id,
       title,
       text,
       inProduction,
       coverImage: { url: coverImg.url, publicId: coverImg.public_id },
-      uuid: uuidv4(),
+      category: req.body.category ,
     });
 
     // saving the blog reference to user

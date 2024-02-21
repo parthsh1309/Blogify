@@ -5,9 +5,10 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 
 const displayAllBlogs = async (req, res) => {
   try {
-    // fetch all the blogs from database
+    // fetch Requested blogs from the database
     const blogs = await Blog.find({
       inProduction: req.query.inProduction || false,
+      category: { $in: [req.query.blogCategory||"All"] }
     })
       .limit(req.query.limit || 10)
       .sort({ createdAt: -1 })

@@ -2,14 +2,14 @@ import conf from "../conf/conf";
 import axios from "axios";
 
 export class AuthService {
-  databaseUrl;
+  databaseBaseUrl;
   constructor() {
-    this.databaseUrl = conf.databaseBaseUrl;
+    this.databaseBaseUrl = conf.databaseBaseUrl;
   }
 
   async createAccount({ username, password, email }) {
     try {
-      const response = await axios.post(`${this.databaseUrl}auth/api/v1/register`, {
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/register`, {
         username,
         email,
         password,
@@ -23,7 +23,7 @@ export class AuthService {
 
   async login({ password, email }) {
     try {
-      const response = await axios.post(`${this.databaseUrl}auth/api/v1/login`, {
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/login`, {
         email,
         password,
       },{withCredentials: true});
@@ -39,7 +39,7 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const response = await axios.get(`${this.databaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true});
+      const response = await axios.get(`${this.databaseBaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true});
       if (response) {
         return response.data;
       }
@@ -51,7 +51,7 @@ export class AuthService {
 
   async logout() {
     try {
-      const response = await axios.post(`${this.databaseUrl}auth/api/v1/logout`,{},{withCredentials: true});
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/logout`,{},{withCredentials: true});
       if(response){
         return response.data;
       }
