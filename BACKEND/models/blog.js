@@ -46,6 +46,11 @@ const blogSchema = new Schema(
       type: Boolean,
       default: true,
     },
+    category: {
+      type: String,
+      enum: ["Technology", "Lifestyle", "Business", "Travel", "Food"],
+      required: true,
+    }
   },
   {
     timestamps: true,
