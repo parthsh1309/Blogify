@@ -40,7 +40,7 @@ function Blog() {
   ) : (
     blogs.length && (
       // if desktop
-      <div>
+      <>
         <div className="sm:flex w-full h-90vh px-2 py-5 gap-3 hidden">
           <BlogStructure
             blogs={blogs[0]}
@@ -95,7 +95,7 @@ function Blog() {
             </Splide>
           </div>
         </div>
-      </div>
+      </>
     )
   );
 

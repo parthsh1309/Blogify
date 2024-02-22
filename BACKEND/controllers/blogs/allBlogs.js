@@ -5,13 +5,19 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 
 const displayAllBlogs = async (req, res) => {
   try {
+    const sortBy = req.query.sortBy||"-createdAt";
+    const sortObj = {};
+    sortObj[sortBy] = -1;
+    console.log(sortObj);
     // fetch Requested blogs from the database
     const blogs = await Blog.find({
       inProduction: req.query.inProduction || false,
       category: { $in: [req.query.blogCategory||"All"] }
     })
       .limit(req.query.limit || 10)
-      .sort({ createdAt: -1 })
+      .sort({
+        ...sortObj
+      })
       .populate({
         path: "author",
         select: "-password -refreshToken -likedBlogs -savedBlogs -blogPosts"
