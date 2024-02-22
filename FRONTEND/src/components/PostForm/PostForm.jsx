@@ -19,8 +19,8 @@ function PostForm() {
       <h1 className="text-2xl text-center pb-4 dark:text-white font-merri underline">
         Please Fill The Following Details To Create A Blog
       </h1>
-      <div className="flex flex-wrap items-center justify-evenly">
-        <div className=" w-2/5 space-y-4">
+      <div className="flex flex-wrap items-center justify-evenly space-y-6">
+        <div className=" sm:w-2/5 w-full space-y-4">
           <FloatingInput text={"Please Enter Title"} {...register("title")} />
           <SelectInput
             list={blogCategory}
@@ -33,7 +33,7 @@ function PostForm() {
             {...register("language")}
           />
         </div>
-        <div className="w-2/5 h-full space-y-4">
+        <div className="sm:w-2/5 w-full h-full space-y-4">
           <div class="flex items-center justify-center w-full">
             <label
               for="dropzone-file"
@@ -73,7 +73,7 @@ function PostForm() {
           control={control}
           name={"content"}
           label={"Content"}
-          defaultValue="<p>Hello World</p>"
+          defaultValue="<h1>Enter Content Here</h1>"
         />
 
         <div className="flex w-full items-center pt-2 justify-end px-16">
@@ -81,13 +81,14 @@ function PostForm() {
             id="link-checkbox"
             type="checkbox"
             value=""
+            onChange={(e) => e.target.checked?setBtnText("Save As Draft"):setBtnText("Create Blog")}
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
           />
           <label
             for="link-checkbox"
             className="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300"
           >
-            Is This Blog Still In Progress..
+            Is This Blog Still In Progress...
           </label>
         </div>
       </div>
