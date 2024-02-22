@@ -1,6 +1,11 @@
+import "@splidejs/react-splide/css";
+import "@splidejs/react-splide/css/core";
+
 import React, { useEffect, useState } from "react";
+import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import blogService from "../../databaseService/Blog";
 import { useLocation } from "react-router-dom";
+import BlogStructure from "./BlogStructure";
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
@@ -14,7 +19,6 @@ function Blog() {
       blogService.getBlogs(false, activeParam, 5).then((res) => {
         if (!res) return;
         setBlogs(res.data);
-        console.log(res.data);
       });
     } catch (error) {
       console.log(error);
@@ -22,27 +26,80 @@ function Blog() {
     setLoading(false);
   }, [location]);
 
+  const options = {
+    type: "loop",
+    gap: "1rem",
+    autoplay: true,
+    pauseOnHover: false,
+    resetProgress: false,
+    height: "15rem",
+  };
+
   return loading ? (
     <div>Loading...</div>
   ) : (
     blogs.length && (
-      <div className="flex flex-wrap w-full h-screen py-2 px-3" >
-        <div className="w-2/6 relative">
-          <img src={blogs[0].coverImage.url} className="h-full" />
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-4/5 bg-gray-700/80 dark:bg-slate-950/80 p-3 space-y-2 rounded-xl">
-            {/* <div className="text-base text-gray-400 font-semibold">{new Date(blogs[0].createdAt)} -- 8 min read</div> */}
-            <div className="text-2xl font-semibold">{blogs[0].title}</div>
-            <div className="text-gray-400">{blogs[0].text.substring(0, 100)}...</div>
-            <div className="flex space-x-3 items-center">
-              <span className="dark:text-gray-400 bg-slate-700 py-1 px-3 rounded-full">{blogs[0].category[0]}</span>
-              <span className="dark:text-gray-500 font-sans">by {blogs[0].author.username}</span>
-            </div>
+      // if desktop
+      <div>
+        <div className="sm:flex w-full h-90vh px-2 py-5 gap-3 hidden">
+          <BlogStructure
+            blogs={blogs[0]}
+            classNamePrimary={"w-4/12"}
+            classNameTitle={"text-2xl"}
+            classNameDate={"text-sm font-bold"}
+          />
+
+          <div className="w-8/12 h-full flex flex-wrap">
+            {blogs.map((blog, i) =>
+              i === 0 ? null : (
+                <BlogStructure
+                  blogs={blog}
+                  key={blog.uuid}
+                  classNamePrimary={"w-1/2 h-1/2 p-2"}
+                  classNameSecondary={"right-2 left-2/5"}
+                  classNameTitle={"text-xl"}
+                  classNameText={"text-sm"}
+                  classNameDate={"text-xs font-bold"}
+                />
+              )
+            )}
           </div>
         </div>
-        {/* {blogs.map((blog) => blog.title)} */}
+
+        <div className="w-full h-50vh px-2 py-5 gap-3 mb-16 sm:hidden ">
+          <div className="wrapper h-full">
+            <Splide
+              options={options}
+              aria-labelledby="autoplay-example-heading"
+              hasTrack={false}
+              className="h-full"
+            >
+              <div style={{ position: "relative" }}>
+                <SplideTrack className="h-50vh">
+                  {blogs.map((blog) => (
+                    <SplideSlide key={blog.uuid}>
+                      <BlogStructure
+                        blogs={blog}
+                        classNamePrimary={"w-full h-50vh flex-shrink-0 gap-2"}
+                        classNameTitle={"text-xl"}
+                        classNameDate={"text-sm font-bold"}
+                      />
+                    </SplideSlide>
+                  ))}
+                </SplideTrack>
+              </div>
+
+              <div className="splide__progress">
+                <div className="splide__progress__bar" />
+              </div>
+            </Splide>
+          </div>
+        </div>
       </div>
     )
   );
+
+  // if Mobile
 }
 
 export default Blog;
