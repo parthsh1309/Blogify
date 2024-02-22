@@ -8,7 +8,6 @@ const displayAllBlogs = async (req, res) => {
     const sortBy = req.query.sortBy||"-createdAt";
     const sortObj = {};
     sortObj[sortBy] = -1;
-    console.log(sortObj);
     // fetch Requested blogs from the database
     const blogs = await Blog.find({
       inProduction: req.query.inProduction || false,

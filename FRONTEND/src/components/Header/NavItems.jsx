@@ -17,8 +17,8 @@ function NavItems({ isMenuOpen }) {
           url: "/all-post",
         },
         {
-          name: "Add Post",
-          url: "/add-post",
+          name: "Add Blog",
+          url: "/add-blog",
         },
       ];
   return (

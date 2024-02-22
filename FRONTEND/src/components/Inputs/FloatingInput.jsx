@@ -9,6 +9,7 @@ function FloatingInput({
   const id = useId();
   return (
     <div className="relative">
+      
       <input
         type={type}
         id={id}

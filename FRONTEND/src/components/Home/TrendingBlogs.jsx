@@ -61,7 +61,7 @@ function TrendingBlogs() {
                 </div>
               </div>
             </Link>
-            <p className="bg-gray-700 w-full " style={{ height: "1px" }}></p>
+            <p className="bg-gray-800 w-full " style={{ height: "1px" }}></p>
           </>
         ))}
       </div>

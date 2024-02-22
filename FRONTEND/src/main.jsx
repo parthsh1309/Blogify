@@ -10,7 +10,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Home, About, Login, Signup } from "./pages";
+import { Home, About, Login, Signup, AddBlog } from "./pages";
 import Protected from "./components/AuthLayout.jsx";
 
 const router = createBrowserRouter(
@@ -50,6 +50,14 @@ const router = createBrowserRouter(
         element={
           <Protected authentication={false}>
             <Signup />
+          </Protected>
+        }
+      />
+      <Route
+        path="/add-Blog"
+        element={
+          <Protected authentication={true}>
+            <AddBlog />
           </Protected>
         }
       />

@@ -12,6 +12,12 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
+    language: {
+      type: String,
+      default: "English",
+      enum: ["English", "Hindi", "Other"],
+    }
+    ,
     coverImage: {
       publicId:{
         type: String,
