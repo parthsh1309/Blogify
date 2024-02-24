@@ -1,10 +1,11 @@
 import React from 'react'
-import { Filter } from '../components'
+import { Blogs, Filter } from '../components'
 
 function AllBlogs() {
   return (
-    <div className='relative '>
+    <div className='relative flex'>
       <Filter />
+      <Blogs/>
     </div>
   )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import HomeNavSearch from "./HomeNavSearch";
+import HomeNavSearch from "../../Inputs/SearchBar";
 import { NavLink, useLocation } from "react-router-dom";
 
 function HomeNav() {

@@ -1,3 +1,4 @@
+import Blogs from "./AllBlogs/Blogs";
 import Filter from "./AllBlogs/Filter";
 import LoginComponent from "./Auth/Login";
 import SignupComponent from "./Auth/Signup";
@@ -13,6 +14,7 @@ import SelectInput from "./Inputs/SelectInput";
 import Logo from "./Logo";
 import PostForm from "./PostForm/PostForm";
 import RTE from "./RTE";
+import SearchBar from "./Inputs/SearchBar";
 
 export {
   PrimaryBtn,
@@ -30,6 +32,7 @@ export {
   PostForm, 
   SelectInput,
   Filter,
+  SearchBar,
+  Blogs,
 };
-
 

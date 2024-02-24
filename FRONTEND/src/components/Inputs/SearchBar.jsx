@@ -1,5 +1,5 @@
 import React from "react";
-import {PrimaryBtn} from "../../index"
+import {PrimaryBtn} from "../index"
 
 function HomeNavSearch() {
   return (
