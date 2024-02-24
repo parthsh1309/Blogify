@@ -2,10 +2,23 @@ import React, { useEffect, useState } from "react";
 import RTE from "../RTE";
 import { useForm } from "react-hook-form";
 import conf from "../../conf/conf";
-import {FloatingInput,SelectInput,SecondaryBtn} from "../index"
-function PostForm() {
-    const [btntext,setBtnText] = useState("Create Blog");
-    const { control, handleSubmit, register, getValues ,watch} = useForm();
+import { FloatingInput, SelectInput, SecondaryBtn } from "../index";
+import blogService from "../../databaseService/Blog";
+import { useNavigate } from "react-router-dom";
+function PostForm({ post }) {
+  const [btntext, setBtnText] = useState("Create Blog");
+  const { control, handleSubmit, register, getValues, watch } = useForm({
+    defaultValues: {
+      title: post?.title,
+      text: post?.text,
+      category: post?.category,
+      language: post?.language,
+      coverImage: post?.coverImage,
+      inProduction: post?.inProduction,
+    },
+  });
+
+  const navigate = useNavigate();
 
   const blogCategory = [
     "Technology",
@@ -14,28 +27,64 @@ function PostForm() {
     "Travel",
     "Food",
   ];
+
+  const submitForm = async (data, e) => {
+   
+    //   check if there's existing post if yes then update the form
+    // else create a new form
+    const formData = new FormData();
+    formData.append("coverImage", data.coverImage[0]);
+    formData.append("title", data.title);
+    formData.append("text", data.text);
+    formData.append("category", data.category);
+    formData.append("language", data.language);
+    formData.append("inProduction", data.inProduction);
+
+    
+    const response = await blogService.addBlog(formData);
+    if (response) {
+      console.log(response);
+      // navigate("/")
+    }
+  };
   return (
-    <form className="w-full py-4 px-5 flex flex-col gap-4">
+    <form
+      onSubmit={handleSubmit(submitForm)}
+      className="w-full py-4 px-5 flex flex-col gap-4"
+      enctype="multipart/form-data"
+    >
       <h1 className="text-2xl text-center pb-4 dark:text-white font-merri underline">
         Please Fill The Following Details To Create A Blog
       </h1>
+
       <div className="flex flex-wrap items-center justify-evenly space-y-6">
         <div className=" sm:w-2/5 w-full space-y-4">
-          <FloatingInput text={"Please Enter Title"} {...register("title")} />
+          <FloatingInput
+            text={"Please Enter Title"}
+            value={post ? getValues("title") : null}
+            {...register("title")}
+          />
+
           <SelectInput
             list={blogCategory}
             label={"Select Category Of Blog"}
-            {...register("category")}
+            name={"category"}
+            register={register}
+            value={getValues("category")}
           />
+
           <SelectInput
             list={["English", "Hindi", "Other"]}
             label={"Select Language Of Blog"}
-            {...register("language")}
+            name={"language"}
+            register={register}
+            value={getValues("language")}
           />
         </div>
+
         <div className="sm:w-2/5 w-full h-full space-y-4">
-          <div class="flex items-center justify-center w-full">
-            <label
+          <div className="flex items-center justify-center w-full">
+            {/* <label
               for="dropzone-file"
               className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
@@ -63,26 +112,49 @@ function PostForm() {
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                 </p>
               </div>
-              <input id="dropzone-file" type="file" className="hidden" />
-            </label>
+              <input
+                id="dropzone-file"
+                type="file"
+                className="hidden"
+                name="coverImage"
+                {...register("coverImage")}
+              />
+            </label> */}
+
+            <input
+              type="file"
+              name="coverImage"
+              id="coverImage"
+              onChange={(event) => {
+                onChange(event.target.files[0]);
+              }}
+              {...register("coverImage")}
+            />
           </div>
         </div>
       </div>
+
       <div className="w-full flex flex-col items-center justify-center">
         <RTE
           control={control}
-          name={"content"}
-          label={"Content"}
-          defaultValue="<h1>Enter Content Here</h1>"
+          name={"text"}
+          defaultValue={
+            post ? getValues("text") : "<h1>Enter Content Here</h1>"
+          }
         />
 
         <div className="flex w-full items-center pt-2 justify-end px-16">
           <input
             id="link-checkbox"
             type="checkbox"
-            value=""
-            onChange={(e) => e.target.checked?setBtnText("Save As Draft"):setBtnText("Create Blog")}
+            onChange={(e) =>
+              e.target.checked
+                ? setBtnText("Save As Draft")
+                : setBtnText("Create Blog")
+            }
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
+            checked={getValues("inProduction")}
+            {...register("inProduction")}
           />
           <label
             for="link-checkbox"
@@ -93,7 +165,11 @@ function PostForm() {
         </div>
       </div>
 
-      <SecondaryBtn children={btntext} type="submit" className="w-2/3 justify-center m-auto py-3 text-xl font-roboSlab"/>
+      <SecondaryBtn
+        children={btntext}
+        type="submit"
+        className="w-2/3 justify-center m-auto py-3 text-xl font-roboSlab"
+      />
     </form>
   );
 }

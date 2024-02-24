@@ -8,6 +8,7 @@ import User from "../../models/User.js";
 
 const createBlog = async (req, res) => {
   try {
+    // console.log(req.body.coverImage)
     // checking if user is authenticated
     if (!req.user) {
       throw new ApiError(401, "User is not authenticated");
@@ -16,13 +17,14 @@ const createBlog = async (req, res) => {
     const { title, text, inProduction } = req.body;
 
     // TODO: Add cover image here from req.files
-    const coverImgUrl =
-      "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
+    const coverImgUrl = req.file.path
+      // "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
 
     // if there's no cover image
     if (!coverImgUrl) {
       throw new ApiError(400, "Cover Image is required");
     }
+
 
     // Upload image to cloudinary
     const coverImg = await uploadCloudinaryFile(coverImgUrl);
@@ -41,6 +43,7 @@ const createBlog = async (req, res) => {
       inProduction,
       coverImage: { url: coverImg.url, publicId: coverImg.public_id },
       category: req.body.category ,
+      language: req.body.language
     });
 
     // saving the blog reference to user
@@ -55,6 +58,7 @@ const createBlog = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, blog, "Blog created successfully"));
   } catch (error) {
+    console.log(error);
     throw new ApiError(
       error.statusCode || 500,
       error.message || "Something went wrong"

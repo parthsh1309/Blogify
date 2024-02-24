@@ -9,7 +9,7 @@ function TrendingBlogs() {
 
   useEffect(() => {
     blogService
-      .getBlogs(false, "All", 8, "likes")
+      .getBlogs(false, "All",100, "likes")
       .then((res) => {
         if (!res) return;
         setBlogs(res.data);
@@ -29,7 +29,7 @@ function TrendingBlogs() {
 
       <div className="flex flex-wrap gap-3 w-full">
         {blogs.map((blog) => (
-          <>
+          <div key={blog._id}>
             <Link className="h-36 w-full flex gap-3">
               <img
                 src={blog.coverImage.url}
@@ -62,7 +62,7 @@ function TrendingBlogs() {
               </div>
             </Link>
             <p className="bg-gray-800 w-full " style={{ height: "1px" }}></p>
-          </>
+          </div>
         ))}
       </div>
     </div>

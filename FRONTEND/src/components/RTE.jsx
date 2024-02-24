@@ -4,7 +4,6 @@ import { Controller } from "react-hook-form";
 import conf from "../conf/conf";
 
 export default function RTE({ name, control, defaultValue = "" }) {
-    console.log(conf.RTEApiKey);
   return (
     <div className="sm:w-4/5">
 
