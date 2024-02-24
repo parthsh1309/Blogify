@@ -20,7 +20,11 @@ export default {
         '30vh':'30vh',
         '20vh':'20vh',
         '10vh':'10vh',
-      }
+      },
+      animation: {
+        fadeIn : 'fadeIn 300ms ease-in',
+        fadeOut : 'fadeOut 300ms ease-in',
+      },
     },
   },
   darkMode:'class',

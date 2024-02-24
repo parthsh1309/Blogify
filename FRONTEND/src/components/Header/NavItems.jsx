@@ -13,8 +13,8 @@ function NavItems({ isMenuOpen }) {
           url: "/about",
         },
         {
-          name: "All Post",
-          url: "/all-post",
+          name: "All Blogs",
+          url: "/all-blogs",
         },
         {
           name: "Add Blog",

@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
+import "animate.css";
 import { Provider } from "react-redux";
 import "./index.css";
 import store from "./store/store.js";
@@ -10,7 +11,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Home, About, Login, Signup, AddBlog } from "./pages";
+import { Home, About, Login, Signup, AddBlog, AllBlogs } from "./pages";
 import Protected from "./components/AuthLayout.jsx";
 
 const router = createBrowserRouter(
@@ -50,6 +51,14 @@ const router = createBrowserRouter(
         element={
           <Protected authentication={false}>
             <Signup />
+          </Protected>
+        }
+      />
+      <Route
+        path="/all-blogs"
+        element={
+          <Protected authentication={false}>
+            <AllBlogs />
           </Protected>
         }
       />

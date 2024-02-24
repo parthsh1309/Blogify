@@ -1,3 +1,4 @@
+import Filter from "./AllBlogs/Filter";
 import LoginComponent from "./Auth/Login";
 import SignupComponent from "./Auth/Signup";
 import PrimaryBtn from "./Buttons/PrimaryBtn";
@@ -28,7 +29,7 @@ export {
   RTE,
   PostForm, 
   SelectInput,
+  Filter,
 };
-
 
 
