@@ -16,6 +16,7 @@ function PostForm({ post }) {
       language: post?.language,
       coverImage: post?.coverImage,
       inProduction: post?.inProduction,
+      time: post?.time,
     },
   });
 
@@ -39,11 +40,13 @@ function PostForm({ post }) {
     formData.append("category", data.category);
     formData.append("language", data.language);
     formData.append("inProduction", data.inProduction);
+    formData.append("time", data.time);
 
     const response = await blogService.addBlog(formData);
     if (response) {
       console.log(response);
-      // navigate("/")
+      // TODO: navigate to Particular  Blog page
+      navigate("/")
     }
   };
   return (
@@ -56,7 +59,7 @@ function PostForm({ post }) {
         Please Fill The Following Details To Create A Blog
       </h1>
 
-      <div className="flex flex-wrap items-center justify-evenly space-y-6">
+      <div className="flex flex-wrap items-center justify-evenly space-y-7">
         <div className=" sm:w-2/5 w-full space-y-4">
           <FloatingInput
             text={"Please Enter Title"}
@@ -77,7 +80,15 @@ function PostForm({ post }) {
             label={"Select Language Of Blog"}
             name={"language"}
             register={register}
+            
             value={getValues("language")}
+          />
+
+          <FloatingInput
+          type={"number"}
+            text={"Please Enter Reading Time In Minutes"}
+            value={post ? getValues("title") : null}
+            {...register("time")}
           />
         </div>
 
@@ -142,11 +153,12 @@ function PostForm({ post }) {
       </div>
 
       <div className="w-full flex flex-col items-center justify-center">
+        
         <RTE
           control={control}
           name={"text"}
           defaultValue={
-            post ? getValues("text") : "<h1>Enter Content Here</h1>"
+            post ? getValues("text") : "<p>Shahi Paneer is a popular Indian dish known for its rich and creamy texture, combined with aromatic spices and tender paneer (Indian cottage cheese).</p><h2>Ingredients:</h2><ul><li>Paneer (Indian cottage cheese)</li><li>Tomatoes</li><li>Onions</li><li>Cashew nuts</li><li>Yogurt</li><li>Cream</li><li>Green cardamom</li><li>Cinnamon</li><li>Cloves</li><li>Ginger-garlic paste</li><li>Coriander powder</li><li>Red chili powder</li><li>Turmeric powder</li><li>Saffron</li><li>Oil or ghee (clarified butter)</li><li>Fresh coriander leaves (for garnish)</li></ul><h2>Preparation:</h2><ol><li>Start by frying the paneer cubes until they turn golden brown. Set aside.</li><li>In a separate pan, heat oil or ghee and add whole spices like green cardamom, cinnamon, and cloves.</li><li>Add finely chopped onions and sauté until they turn golden brown.</li><li>Next, add ginger-garlic paste and cook until the raw smell disappears.</li><li>Add chopped tomatoes and cook until they become soft and mushy.</li><li>Grind cashew nuts into a fine paste and add it to the pan.</li><li>Now, add yogurt, cream, and powdered spices like coriander, red chili, and turmeric powder.</li><li>Add saffron strands soaked in warm milk for a rich flavor and vibrant color.</li><li>Finally, add the fried paneer cubes and simmer the gravy until it thickens.</li><li>Garnish with fresh coriander leaves and serve hot with naan or rice.</li></ol><h2>Conclusion:</h2><p>Shahi Paneer is a royal delicacy that is enjoyed by people of all ages. Its creamy texture and flavorful spices make it a perfect dish for special occasions or everyday meals.</p><p>Whether you're a fan of Indian cuisine or trying it for the first time, Shahi Paneer is sure to delight your taste buds and leave you craving for more.</p>"
           }
         />
 

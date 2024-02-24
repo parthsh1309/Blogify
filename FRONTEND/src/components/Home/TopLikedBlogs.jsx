@@ -8,7 +8,7 @@ function TopLikedBlogs() {
 
   useEffect(() => {
     blogService
-      .getBlogs(false, "All", 8, "likes")
+      .getBlogs(false, "All", 20, "likes")
       .then((res) => {
         if (!res) return;
         setBlogs(res.data);

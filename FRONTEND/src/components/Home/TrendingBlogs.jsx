@@ -9,7 +9,7 @@ function TrendingBlogs() {
 
   useEffect(() => {
     blogService
-      .getBlogs(false, "All",100, "likes")
+      .getBlogs(false, "All", 10, "likes")
       .then((res) => {
         if (!res) return;
         setBlogs(res.data);

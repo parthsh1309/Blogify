@@ -22,13 +22,13 @@ function BlogStructure({
               1 +
               "/" +
               new Date(blogs.createdAt).getFullYear())}{" "}
-          -- {blogs._id.substring(0, 2)} min read
+          -- {blogs.time || '5'} min read
         </div>
         <div className={`font-semibold font-merri ${classNameTitle}`}>
-          {blogs.title}
+          {blogs.title.substring(0, 50)}
         </div>
         <div className={`text-gray-400 ${classNameText}`}>
-          {blogs.text.substring(0, 100)}...
+          <div dangerouslySetInnerHTML={{ __html: blogs.text.substring(0, 50)+"..." }}/>
         </div>
         <div className={`flex space-x-3 items-center ${classNameCategory}`}>
           <span className="dark:text-gray-400 bg-slate-700 py-1 px-3 rounded-full">

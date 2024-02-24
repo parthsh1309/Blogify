@@ -12,6 +12,11 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
+    time: {
+      type: Number,
+      required: true,
+    }
+    ,
     language: {
       type: String,
       default: "English",

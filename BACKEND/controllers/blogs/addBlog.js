@@ -43,7 +43,8 @@ const createBlog = async (req, res) => {
       inProduction,
       coverImage: { url: coverImg.url, publicId: coverImg.public_id },
       category: req.body.category ,
-      language: req.body.language
+      language: req.body.language,
+      time: req.body.time
     });
 
     // saving the blog reference to user
