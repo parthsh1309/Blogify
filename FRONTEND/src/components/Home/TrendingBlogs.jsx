@@ -45,12 +45,16 @@ function TrendingBlogs() {
                       1 +
                       "/" +
                       new Date(blog.createdAt).getFullYear())}{" "}
-                  -- {blog._id.substring(0, 2)} min read
+                  -- {blog.time || '5'} min read
                 </div>
                 <div className="font-semibold font-merri text-lg">{blog.title.substring(0, 20)}...</div>
-                <div className="text-gray-400 text-sm">
-                  {blog.text.substring(0, 100)}...
-                </div>
+                <div className={`text-gray-400 text-sm`}>
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: blog.text?.substring(0, 40) + "...",
+                  }}
+                />
+              </div>
                 <div className="flex space-x-3 items-center">
                   <span className="dark:text-gray-400 bg-slate-700 text-base py-1 px-2 rounded-full">
                     {blog.category[0]}

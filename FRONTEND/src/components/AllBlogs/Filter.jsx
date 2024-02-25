@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import PrimaryBtn from "../Buttons/PrimaryBtn";
 import SecondaryBtn from "../Buttons/SecondaryBtn";
 
-function Filter() {
+function Filter({ filterVisible,setFilterVisible }) {
   const filterItems = [
     {
       name: "Category",
@@ -51,22 +51,31 @@ function Filter() {
   };
 
   const { register, handleSubmit } = useForm();
-  
+
   const onSubmit = (data) => {
     console.log(data);
-  }
+  };
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <aside
-        id="sidebar-multi-level-sidebar"
-        class="sticky sm:relative top-0 left-0 w-72 h-screen sticky transition-transform -translate-x-full sm:translate-x-0"
-        aria-label="Sidebar"
+    <aside
+      id="sidebar-multi-level-sidebar"
+      class="h-screen sm:w-1/5 bg-gray-700 dark:bg-gray-900 relative overflow-y-scroll"
+      aria-label="Sidebar"
+    >
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={`h-full fixed z-10 sm:w-1/5 w-2/3 ${
+          filterVisible ? "sm:block animate-fadeInLeft" : `animate-fadeOutLeft hidden sm:block`
+        }`}
       >
         <div class="h-full px-3 py-4  bg-gray-200 dark:bg-gray-800 space-y-8 ">
-          <h1 className="text-xl text-white text-center border border-gray-700 w-fit m-auto py-2 px-4 rounded-full font-merri bg-gray-900 flex items-center gap-2">
-            <span className="text-lg material-symbols-outlined">tune</span>
-            Filters
-          </h1>
+          <div className="flex justify-between items-center text-white">
+            <h1 className="text-xl text-white text-center border border-gray-700 w-fit py-2 px-4 rounded-full font-merri bg-gray-900 flex items-center gap-2">
+              <span className="text-lg material-symbols-outlined">tune</span>
+              Filters
+            </h1>
+
+            <span className="material-symbols-outlined p-3 sm:hidden" onClick={() => setFilterVisible(false)}>close</span>
+          </div>
 
           <div className="flex flex-col justify-center items-center">
             <ul className="space-y-2 w-full">
@@ -112,8 +121,11 @@ function Filter() {
 
               <li>
                 <div className="relative mb-6">
-                  <label for="labels-range-input" className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer">
-                   Please Choose Time
+                  <label
+                    for="labels-range-input"
+                    className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer"
+                  >
+                    Please Choose Time
                   </label>
                   <input
                     id="labels-range-input"
@@ -133,17 +145,20 @@ function Filter() {
                     40 Min
                   </span>
                   <span className="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">
-                   60 Min
+                    60 Min
                   </span>
                 </div>
               </li>
             </ul>
-          <SecondaryBtn type="submit" children="Submit Filter" className="mt-10" />
+            <SecondaryBtn
+              type="submit"
+              children="Submit Filter"
+              className="mt-10"
+            />
           </div>
-
         </div>
-      </aside>
-    </form>
+      </form>
+    </aside>
   );
 }
 

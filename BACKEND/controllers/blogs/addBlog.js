@@ -42,7 +42,7 @@ const createBlog = async (req, res) => {
       text,
       inProduction,
       coverImage: { url: coverImg.url, publicId: coverImg.public_id },
-      category: req.body.category ,
+      category:[ req.body.category , "All" ],
       language: req.body.language,
       time: req.body.time
     });

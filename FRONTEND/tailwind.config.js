@@ -24,6 +24,8 @@ export default {
       animation: {
         fadeIn : 'fadeIn 300ms ease-in',
         fadeOut : 'fadeOut 300ms ease-in',
+        fadeInLeft : 'fadeInLeft 300ms ease-in',
+        fadeOutLeft : 'fadeOutLeft 300ms ease-in',
       },
     },
   },

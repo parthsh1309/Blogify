@@ -8,6 +8,8 @@ function BlogStructure({
   classNameTitle,
   classNameText,
   classNameCategory,
+  titleMaxLength = 50,
+  textMaxLength = 50,
 }) {
   return (
     <div className={` relative ${classNamePrimary} `}>
@@ -25,10 +27,10 @@ function BlogStructure({
           -- {blogs.time || '5'} min read
         </div>
         <div className={`font-semibold font-merri ${classNameTitle}`}>
-          {blogs.title.substring(0, 50)}
+          {blogs.title.substring(0, titleMaxLength)}
         </div>
         <div className={`text-gray-400 ${classNameText}`}>
-          <div dangerouslySetInnerHTML={{ __html: blogs.text.substring(0, 50)+"..." }}/>
+          <div dangerouslySetInnerHTML={{ __html: blogs.text.substring(0, textMaxLength)+"..." }}/>
         </div>
         <div className={`flex space-x-3 items-center ${classNameCategory}`}>
           <span className="dark:text-gray-400 bg-slate-700 py-1 px-3 rounded-full">

@@ -23,6 +23,7 @@ const displayAllBlogs = async (req, res) => {
       })
       .exec();
 
+
     // if there are no blogs
     if (!blogs || blogs.length === 0) {
       throw new ApiError(404, "No blogs found");

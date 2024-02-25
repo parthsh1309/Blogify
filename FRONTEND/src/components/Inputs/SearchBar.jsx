@@ -3,7 +3,7 @@ import {PrimaryBtn} from "../index"
 
 function HomeNavSearch() {
   return (
-    <form className="max-w-md mx-auto w-full">
+    <form className=" mx-auto w-2/3">
       <label
         htmlFor="default-search"
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"

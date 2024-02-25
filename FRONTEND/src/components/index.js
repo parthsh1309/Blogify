@@ -15,6 +15,7 @@ import Logo from "./Logo";
 import PostForm from "./PostForm/PostForm";
 import RTE from "./RTE";
 import SearchBar from "./Inputs/SearchBar";
+import BlogStucture from "./AllBlogs/BlogStucture02";
 
 export {
   PrimaryBtn,
@@ -34,5 +35,6 @@ export {
   Filter,
   SearchBar,
   Blogs,
+  BlogStucture
 };
 
