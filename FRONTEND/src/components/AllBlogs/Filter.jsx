@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import PrimaryBtn from "../Buttons/PrimaryBtn";
 import SecondaryBtn from "../Buttons/SecondaryBtn";
 
-function Filter({ filterVisible,setFilterVisible }) {
+function Filter({ filterVisible,setFilterVisible,filters,setFilters}) {
   const filterItems = [
     {
       name: "Category",
@@ -46,14 +46,14 @@ function Filter({ filterVisible,setFilterVisible }) {
 
   const [openDropdown, setOpenDropdown] = React.useState(false);
   const toggleDropdown = (index) => {
-    console.log(index);
     setOpenDropdown(index === openDropdown ? null : index);
   };
 
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    setFilters(data);
+    console.log(filters);
   };
   return (
     <aside
@@ -125,7 +125,7 @@ function Filter({ filterVisible,setFilterVisible }) {
                     for="labels-range-input"
                     className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer"
                   >
-                    Please Choose Time
+                    Read Time
                   </label>
                   <input
                     id="labels-range-input"

@@ -5,13 +5,19 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 
 const displayAllBlogs = async (req, res) => {
   try {
+   let category = req.query.blogCategory?.split(",");
+   let language = req.query.language?.split(",");
+   console.log(category);
+   console.log(language);
     const sortBy = req.query.sortBy||"-createdAt";
     const sortObj = {};
     sortObj[sortBy] = -1;
     // fetch Requested blogs from the database
     const blogs = await Blog.find({
       inProduction: req.query.inProduction || false,
-      category: { $in: [req.query.blogCategory||"All"] }
+      category: { $in: category || "All"},
+      language: { $in: language || "English" },
+      // time: { $in: [req.query.time||60] },
     })
       .limit(req.query.limit || 10)
       .sort({

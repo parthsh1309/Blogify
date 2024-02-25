@@ -8,13 +8,15 @@ class BlogService {
     this.databaseBaseUrl = conf.databaseBaseUrl;
   }
 
-  async getBlogs(inProduction, category, limit, sortBy) {
+  async getBlogs(inProduction=false, category="All", limit=10, sortBy="-createdAt",language="English",time="") {
     try {
       const params = {
-        inProduction: inProduction || false,
-        blogCategory: category || "All",
-        limit: limit || 10,
-        sortBy: sortBy || "-createdAt",
+        inProduction,
+        blogCategory: category,
+        limit: limit,
+        sortBy: sortBy ,
+        language,
+        time
       };
       const response = await axios.get(
         `${this.databaseBaseUrl}blog/api/v1/all-blogs?${new URLSearchParams(
