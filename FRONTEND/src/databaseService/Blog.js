@@ -8,7 +8,7 @@ class BlogService {
     this.databaseBaseUrl = conf.databaseBaseUrl;
   }
 
-  async getBlogs(inProduction=false, category="All", limit=10, sortBy="-createdAt",language="English",time="") {
+  async getBlogs(inProduction=false, category="All", limit=10, sortBy="-createdAt",language="English",time=60) {
     try {
       const params = {
         inProduction,

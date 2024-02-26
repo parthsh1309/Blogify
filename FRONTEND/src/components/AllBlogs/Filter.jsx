@@ -3,14 +3,11 @@ import { useForm } from "react-hook-form";
 import PrimaryBtn from "../Buttons/PrimaryBtn";
 import SecondaryBtn from "../Buttons/SecondaryBtn";
 
-function Filter({ filterVisible,setFilterVisible,filters,setFilters}) {
+function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
   const filterItems = [
     {
       name: "Category",
       item: [
-        {
-          name: "All",
-        },
         {
           name: "Food",
         },
@@ -44,17 +41,17 @@ function Filter({ filterVisible,setFilterVisible,filters,setFilters}) {
     },
   ];
 
+  // toggle dropdown
   const [openDropdown, setOpenDropdown] = React.useState(false);
   const toggleDropdown = (index) => {
     setOpenDropdown(index === openDropdown ? null : index);
   };
 
+  // submit form
   const { register, handleSubmit } = useForm();
+  // submitting the filter data to the parent component
+  const onSubmit = (data) => setFilters(data);
 
-  const onSubmit = (data) => {
-    setFilters(data);
-    console.log(filters);
-  };
   return (
     <aside
       id="sidebar-multi-level-sidebar"
@@ -64,7 +61,9 @@ function Filter({ filterVisible,setFilterVisible,filters,setFilters}) {
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={`h-full fixed z-10 sm:w-1/5 w-2/3 ${
-          filterVisible ? "sm:block animate-fadeInLeft" : `animate-fadeOutLeft hidden sm:block`
+          filterVisible
+            ? "sm:block animate-fadeInLeft"
+            : `animate-fadeOutLeft hidden sm:block`
         }`}
       >
         <div class="h-full px-3 py-4  bg-gray-200 dark:bg-gray-800 space-y-8 ">
@@ -74,7 +73,12 @@ function Filter({ filterVisible,setFilterVisible,filters,setFilters}) {
               Filters
             </h1>
 
-            <span className="material-symbols-outlined p-3 sm:hidden" onClick={() => setFilterVisible(false)}>close</span>
+            <span
+              className="material-symbols-outlined p-3 sm:hidden"
+              onClick={() => setFilterVisible(false)}
+            >
+              close
+            </span>
           </div>
 
           <div className="flex flex-col justify-center items-center">

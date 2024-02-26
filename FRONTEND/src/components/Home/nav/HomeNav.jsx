@@ -43,8 +43,8 @@ function HomeNav() {
     },
   ];
   return (
-    <div className="w-full overflow-hidden flex sm:flex-row flex-col justify-center items-center gap-3">
-      <div className=" py-3 flex w-full lg:overflow-hidden overflow-scroll">
+    <div className="w-full overflow-hidden flex justify-center items-center gap-3">
+      <div className=" py-3 flex w-full sm:overflow-hidden overflow-scroll">
         <div className="flex items-center">
           <ul className="flex flex-row font-medium mt-0 space-x-2 rtl:space-x-reverse text-base">
             {homeNavItems.map((item) => (
@@ -64,9 +64,7 @@ function HomeNav() {
           </ul>
         </div>
       </div>
-        <div className=" w-full flex">
-          <HomeNavSearch />
-        </div>
+       
     </div>
   );
 }

@@ -16,7 +16,7 @@ const router = express.Router();
 import path from "path";
 
 // Define the destination directory
-const destinationDirectory = path.resolve( '../../uploads');
+const destinationDirectory = path.resolve( './../uploads');
 
 import fs from "fs";
 if (!fs.existsSync(destinationDirectory)) {

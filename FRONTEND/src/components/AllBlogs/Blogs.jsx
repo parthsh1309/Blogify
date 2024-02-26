@@ -6,17 +6,36 @@ import Pagination from "./Pagination";
 
 function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
   const [blogs, setBlogs] = useState([]);
-  // can use redux to store this
 
   useEffect(() => {
+    // checking if languages and categories are empty if yes then set them to default
+    const language =
+      !filters.Language?.length < 0
+        ? ["English"]
+        : filters.Language || ["English"];
+
+    const category =
+      !filters.Category?.length < 0
+        ? ["All"]
+        : filters.Category || [
+            "All",
+            "Food",
+            "Travel",
+            "Lifestyle",
+            "Business",
+            "Technology",
+          ];
+
+    // get all blogs from the database and set them to the state
     blogService
-      .getBlogs(false, filters?.Category, 30, "-createdAt", filters?.Language, filters.Time)
+      .getBlogs(false, category, 8, "-createdAt", language, filters.Time)
       .then((res) => {
         // console.log(res.data);
         return setBlogs(res.data);
       })
       .catch((err) => console.log(err));
   }, [filters]);
+
   return (
     <div className="sm:w-3/4">
       <div className="flex justify-center items-center gap-2">
