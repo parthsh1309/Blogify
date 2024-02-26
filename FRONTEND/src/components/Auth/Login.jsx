@@ -20,7 +20,7 @@ function Login() {
       // logging in
       const session = await authService.login(data);
       // if login successful
-      console.log(session.data);
+      
       if (session.data.success) {
         // get the current user and save it to store
         const userData = await authService.getCurrentUser();

@@ -4,12 +4,13 @@ import Login from "./Login";
 import Signup from "./Signup";
 import AddBlog from "./AddBlog";
 import AllBlogs from "./AllBlogs";
-
+import Blog from "./Blog"
 export {
     Home,
     About,
     Login,
     Signup,
     AddBlog,
-    AllBlogs
+    AllBlogs,
+    Blog
 };

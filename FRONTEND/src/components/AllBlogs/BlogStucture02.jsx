@@ -5,6 +5,7 @@ function BlogSructure({blog, classNamePrimary, classNameTitle,classNameText, tex
   return (
     // <div>
       <Link
+      to={`/blog/${blog.uuid}`}
         className={` w-full h-auto bg-no-repeat bg-left bg-cover p-3 ${classNamePrimary} `}
         style={{ backgroundImage: `url(${blog.coverImage.url})` }}
         // key={blog.uuid}

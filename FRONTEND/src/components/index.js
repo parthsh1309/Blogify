@@ -17,6 +17,7 @@ import RTE from "./RTE";
 import SearchBar from "./Inputs/SearchBar";
 import BlogStucture from "./AllBlogs/BlogStucture02";
 import AllBlogsComponent from "./AllBlogs/AllBlogs";
+import SingleBlogPage from "./SingleBlogPage/Blog";
 
 export {
   PrimaryBtn,
@@ -37,5 +38,6 @@ export {
   SearchBar,
   Blogs,
   BlogStucture,
-  AllBlogsComponent
+  AllBlogsComponent,
+  SingleBlogPage
 };

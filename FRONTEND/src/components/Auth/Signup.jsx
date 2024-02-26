@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { FloatingInput, Logo, PrimaryBtn, SecondaryBtn } from "../index";
 import GoogleBtn from "./GoogleBtn";
 import authService from "../../databaseService/Auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/authSlice";
 
 function Signup() {
@@ -12,8 +12,10 @@ function Signup() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const authStatus = useSelector((state) => state.auth.status);
 
   const registerUser = async (data) => {
+
     setError("");
     try {
       // creating the account
@@ -37,6 +39,12 @@ function Signup() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (authStatus === true) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <div className="h-full flex justify-center items-center p-3">

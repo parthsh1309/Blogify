@@ -18,11 +18,6 @@ import path from "path";
 // Define the destination directory
 const destinationDirectory = path.resolve( './../uploads');
 
-import fs from "fs";
-if (!fs.existsSync(destinationDirectory)) {
-  fs.mkdirSync(destinationDirectory, { recursive: true });
-}
-
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

@@ -5,15 +5,13 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 
 const displayAllBlogs = async (req, res) => {
   try {
-
-    console.log(req.query);
+    // req query parameters 
     let category = req.query?.blogCategory?.split(",")||"All";
     let language = req.query?.language?.split(",");
-
-
     const sortBy = req.query.sortBy || "-createdAt";
     const sortObj = {};
     sortObj[sortBy] = -1;
+
     // fetch Requested blogs from the database
     const blogs = await Blog.find({
       inProduction: req.query.inProduction || false,
@@ -31,7 +29,6 @@ const displayAllBlogs = async (req, res) => {
       })
       .exec();
 
-    // console.log(blogs);
     // if there are no blogs
     if (!blogs || blogs.length === 0) {
       throw new ApiError(404, "No blogs found");
