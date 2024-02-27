@@ -39,5 +39,5 @@ export {
   Blogs,
   BlogStucture,
   AllBlogsComponent,
-  SingleBlogPage
+  SingleBlogPage,
 };

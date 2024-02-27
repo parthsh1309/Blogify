@@ -8,15 +8,22 @@ class BlogService {
     this.databaseBaseUrl = conf.databaseBaseUrl;
   }
 
-  async getBlogs(inProduction=false, category="All", limit=10, sortBy="-createdAt",language="English",time=60) {
+  async getBlogs(
+    inProduction = false,
+    category = "All",
+    limit = 10,
+    sortBy = "-createdAt",
+    language = "English",
+    time = 60
+  ) {
     try {
       const params = {
         inProduction,
         blogCategory: category,
         limit: limit,
-        sortBy: sortBy ,
+        sortBy: sortBy,
         language,
-        time
+        time,
       };
       const response = await axios.get(
         `${this.databaseBaseUrl}blog/api/v1/all-blogs?${new URLSearchParams(
@@ -32,20 +39,38 @@ class BlogService {
     }
   }
 
-  async addBlog(data ) {
-    
+  async addBlog(data) {
     console.log(data);
     try {
       const response = await axios.post(
         `${this.databaseBaseUrl}blog/api/v1/create-blog`,
-        data,{withCredentials: true , Headers:{ 'Content-Type': 'multipart/form-data'}}
-        )
+        data,
+        {
+          withCredentials: true,
+          Headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (response) {
         return response.data;
       } else {
         throw new Error("Something went wrong");
       }
+    } catch (error) {
+      console.log(error.response);
+      return error.response.data.error;
+    }
+  }
+
+  async getSingleBlog(blogId) {
+    try {
+      const response = await axios.get(
+        `${this.databaseBaseUrl}blog/api/v1/blog/${blogId}`
+      );
+      if (response) {
+        return response.data;
+      }
+      throw new Error("Blog not found");
     } catch (error) {
       console.log(error.response);
       return error.response.data.error;

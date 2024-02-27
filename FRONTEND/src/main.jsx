@@ -11,7 +11,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Home, About, Login, Signup, AddBlog, AllBlogs, Blog, } from "./pages";
+import { Home, About, Login, Signup, AddBlog, AllBlogs, Blog } from "./pages";
 import Protected from "./components/AuthLayout.jsx";
 
 const router = createBrowserRouter(
@@ -69,7 +69,7 @@ const router = createBrowserRouter(
             <AddBlog />
           </Protected>
         }
-      />
+        />
 
       <Route
         path="/blog/:blogId"

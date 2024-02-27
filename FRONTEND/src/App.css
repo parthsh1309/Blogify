@@ -1,7 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Revolution&family=Roboto+Slab:wght@100..900&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Protest+Revolution&family=Roboto+Slab:wght@100..900&display=swap");
 
 .group[type="checkbox"]:checked + label {
-    background-color: rgba(43, 44, 70, 0.681);
-    color: white;
-  }
+  background-color: rgba(43, 44, 70, 0.681);
+  color: white;
+}
+
+
+.blogtext h2{
+  font-family: 'Merriweather', serif;
+  font-size: 26px;
+}
+.blogtext ul,.blogtext ol{
+  padding-left: 25px;
+}
+.blogtext ul li{
+  list-style: disc;
+  padding-left: 3px;
+  font-family: 'montserrat', serif;
+  font-size: 16px;
+}
+.blogtext ol li{
+  padding-left: 4px;
+  font-family: 'montserrat', serif;
+  font-size: 16px;
+  list-style: number;
+}
+.blogtext p{
+  /* font-family: 'roboto', serif; */
+  font-size: 18px;
+}

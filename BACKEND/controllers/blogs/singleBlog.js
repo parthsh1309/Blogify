@@ -8,7 +8,10 @@ const displaySingleBlog = async (req, res) => {
     // fetch the blog from database based on uuid
     const blog = await Blog.findOne({
       uuid: req.params.blogId,
-    });
+    }).populate({
+      path: "author",
+      select: "username email",
+    })
 
     // if there's no blog
     if (!blog) {
