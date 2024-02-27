@@ -76,6 +76,19 @@ class BlogService {
       return error.response.data.error;
     }
   }
+
+  async LikeBlog(blogId) {
+    try {
+      const response = await axios.post(`${this.databaseBaseUrl}blog/api/v1/like-blog/${blogId}`,{},{withCredentials: true});
+      if (response) {
+        return response.data;
+      }
+      throw new Error("Unable to like blog");
+    } catch (error) {
+      console.log(error.response);
+      return error.response.data.error;
+    }
+  }
 }
 
 const blogService = new BlogService();

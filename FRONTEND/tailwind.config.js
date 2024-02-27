@@ -27,6 +27,7 @@ export default {
         fadeInLeft : 'fadeInLeft 300ms ease-in',
         fadeOutLeft : 'fadeOutLeft 300ms ease-in',
       },
+
     },
   },
   darkMode:'class',

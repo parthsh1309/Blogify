@@ -18,7 +18,8 @@ import SearchBar from "./Inputs/SearchBar";
 import BlogStucture from "./AllBlogs/BlogStucture02";
 import AllBlogsComponent from "./AllBlogs/AllBlogs";
 import SingleBlogPage from "./SingleBlogPage/Blog";
-
+import LikeBtn from "./Buttons/LikeBtn";
+import DislikeBtn from "./Buttons/DislikeBtn";
 export {
   PrimaryBtn,
   Navbar,
@@ -40,4 +41,6 @@ export {
   BlogStucture,
   AllBlogsComponent,
   SingleBlogPage,
+  LikeBtn,
+  DislikeBtn
 };
