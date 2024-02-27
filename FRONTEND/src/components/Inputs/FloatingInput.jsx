@@ -4,11 +4,12 @@ function FloatingInput({
   text = "Enter",
   type = "text",
   placeholder = "",
+  className = "",
   ...props
 },ref) {
   const id = useId();
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       
       <input
         type={type}

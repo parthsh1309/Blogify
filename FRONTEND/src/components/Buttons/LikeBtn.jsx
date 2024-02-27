@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 function LikeBtn({ likes = [], id }) {
     const auth = useSelector(state => state.auth);
   const [blogLiked, setBlogLiked] = useState(false);
-  console.log(auth);
 
   const onClick = () => {
       setBlogLiked(!blogLiked);

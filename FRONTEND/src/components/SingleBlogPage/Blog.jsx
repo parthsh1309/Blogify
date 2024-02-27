@@ -3,6 +3,7 @@ import { Link, useLoaderData, useParams } from "react-router-dom";
 import blogService from "../../databaseService/Blog";
 import LikeBtn from "../Buttons/LikeBtn";
 import DislikeBtn from "../Buttons/DislikeBtn";
+import Comment from "./Comment";
 
 function Blog() {
   const { blogId } = useParams();
@@ -19,7 +20,7 @@ function Blog() {
     });
   }, []);
   return loading ? (
-    <div>Loading...</div>
+    <div>{error.msg} Loading...</div>
   ) : (
     <div className="w-full ">
       <div className="w-full items-center flex flex-wrap-reverse justify-center sm:gap-3 sm:space-x-9">
@@ -49,13 +50,14 @@ function Blog() {
         dangerouslySetInnerHTML={{ __html: blog.text }}
       />
       <div className="flex ml-auto py-2 px-5 space-x-5">
-        <LikeBtn likes={blog.likes} id={blog.uuid}/>
-        <DislikeBtn/>
+        <LikeBtn likes={blog.likes} id={blog.uuid} />
+        <DislikeBtn />
       </div>
       <hr
         className="border-t border-gray-600 my-4 w-4/5 m-auto
       "
       />
+     <Comment />
     </div>
   );
 }
