@@ -57,7 +57,7 @@ function Blog() {
         className="border-t border-gray-600 my-4 w-4/5 m-auto
       "
       />
-     <Comment />
+     <Comment uuid={blog.uuid}/>
     </div>
   );
 }

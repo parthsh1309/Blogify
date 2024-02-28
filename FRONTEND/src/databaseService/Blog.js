@@ -79,11 +79,44 @@ class BlogService {
 
   async LikeBlog(blogId) {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}blog/api/v1/like-blog/${blogId}`,{},{withCredentials: true});
+      const response = await axios.post(
+        `${this.databaseBaseUrl}blog/api/v1/like-blog/${blogId}`,
+        {},
+        { withCredentials: true }
+      );
       if (response) {
         return response.data;
       }
       throw new Error("Unable to like blog");
+    } catch (error) {
+      console.log(error.response);
+      return error.response.data.error;
+    }
+  }
+
+  async addComments(blogId, content) {
+    try {
+      console.log(content);
+      const response = await axios.post(
+        `${this.databaseBaseUrl}blog/api/v1/blog-comment/${blogId}`,
+        { content },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.log(error.response);
+      return error.response.data.error;
+    }
+  }
+
+  async getBlogComments(blogId) {
+    try {
+      const response = await axios.get(
+        `${this.databaseBaseUrl}blog/api/v1/get-comments/${blogId}`
+      );
+      if (response) {
+        return response.data;
+      }
+      throw new Error("Unable to get blog comments");
     } catch (error) {
       console.log(error.response);
       return error.response.data.error;

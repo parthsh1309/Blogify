@@ -7,8 +7,11 @@ const getblogComments = async (req, res) => {
   try {
     // get the blog based on uuid
     const blogComments = await Blog.findOne({ uuid: req.params.blogId })
-      .select("-coverImage -title -text -author -likes -inProduction")
-      .populate("comments")
+      .select("uuid comments")
+      .populate({
+        path: "comments",
+       populate: { path: "author", select: "username" },
+      })
       .limit(15)
       .exec();
 
@@ -17,6 +20,7 @@ const getblogComments = async (req, res) => {
       throw new ApiError(404, "Blog not found");
     }
 
+    console.log(blogComments);
     // return the response
     return res
     .status(200)
