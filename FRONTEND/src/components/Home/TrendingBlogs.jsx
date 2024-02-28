@@ -29,9 +29,9 @@ function TrendingBlogs() {
 
       <div className="flex flex-wrap gap-3 w-full">
         {blogs.map((blog) => (
-          <div key={blog._id} >
+          <div key={blog.uuid} >
             <Link className="h-36 w-full flex gap-3 relative">
-              <KebabMenu/>
+              <KebabMenu blogId={blog.uuid}/>
               <img
                 src={blog.coverImage.url}
                 className="h-full w-2/5"

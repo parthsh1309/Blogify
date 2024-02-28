@@ -1,9 +1,12 @@
 import React, { useEffect, useId, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CopyToClipboard from "react-copy-to-clipboard";
+import conf from "../../conf/conf";
 
-function KebabMenu() {
+function KebabMenu({ blogId }) {
   const [dropdown, setDropdown] = useState(false);
   const id = useId();
+  const navigate = useNavigate();
 
   const toggleDropdown = () => {
     setDropdown(!dropdown);
@@ -16,14 +19,39 @@ function KebabMenu() {
         if (dropdownMenu && !dropdownMenu.contains(event.target)) {
           return setDropdown(false);
         }
-
-        // 
       }
     }
 
     document.addEventListener("mousedown", handleClickOutside);
-    
   }, [dropdown]);
+
+  const dropMenuItems = [
+    {
+      name: "Edit",
+      function: () => {
+        console.log("Edit");
+      },
+    },
+    {
+      name: "Share",
+      function: () => {
+        navigator.clipboard.writeText(`${conf.copyLinkUrl}${blogId}`);
+        setDropdown(false);
+      },
+    },
+    {
+      name: "More Like This",
+      function: () => {
+        navigate("/all-blogs");
+      },
+    },
+    {
+      name: "Delete",
+      function: () => {
+        console.log("Delete");
+      },
+    },
+  ];
 
   return (
     <div className="absolute top-2 right-2 p-1">
@@ -53,11 +81,14 @@ function KebabMenu() {
           aria-labelledby="dropdownMenuIconButton"
         >
           <li>
-            <button
-              className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
-            >
-              Reply
-            </button>
+            {dropMenuItems.map((item) => (
+              <button
+                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
+                onClick={item.function}
+              >
+                {item.name}
+              </button>
+            ))}
           </li>
         </ul>
       </div>

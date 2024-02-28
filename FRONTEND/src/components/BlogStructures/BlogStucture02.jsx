@@ -15,7 +15,7 @@ function BlogStructure({
       className={`w-full h-auto bg-no-repeat bg-left bg-cover p-3 relative ${classNamePrimary}`}
       style={{ backgroundImage: `url(${blog.coverImage.url})` }}
     >
-      <KebabMenu/>
+      <KebabMenu blogId={blog.uuid}/>
       <Link
         to={`/blog/${blog.uuid}`}
 
