@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import blogService from "../../databaseService/Blog";
 import { Link } from "react-router-dom";
+import {KebabMenu} from "../index";
 
 function TrendingBlogs() {
   // TODO: sort posts as per Views
@@ -13,7 +14,6 @@ function TrendingBlogs() {
       .then((res) => {
         if (!res) return;
         setBlogs(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
@@ -29,11 +29,12 @@ function TrendingBlogs() {
 
       <div className="flex flex-wrap gap-3 w-full">
         {blogs.map((blog) => (
-          <div key={blog._id}>
-            <Link className="h-36 w-full flex gap-3">
+          <div key={blog._id} >
+            <Link className="h-36 w-full flex gap-3 relative">
+              <KebabMenu/>
               <img
                 src={blog.coverImage.url}
-                className="h-full w-1/3"
+                className="h-full w-2/5"
                 alt=""
                 loading="lazy"
               />
@@ -47,11 +48,11 @@ function TrendingBlogs() {
                       new Date(blog.createdAt).getFullYear())}{" "}
                   -- {blog.time || '5'} min read
                 </div>
-                <div className="font-semibold font-merri text-lg">{blog.title.substring(0, 20)}...</div>
+                <div className="font-semibold font-merri text-lg">{blog.title.substring(0, 14)}...</div>
                 <div className={`text-gray-400 text-sm`}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: blog.text?.substring(0, 40) + "...",
+                    __html: blog.text?.substring(0, 30) + "...",
                   }}
                 />
               </div>

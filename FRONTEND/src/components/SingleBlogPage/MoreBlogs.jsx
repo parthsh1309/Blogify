@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import blogService from "../../databaseService/Blog";
-import BlogStructure from "../Home/BlogStructure";
+import {BlogStructure} from "../index";
 
 function MoreBlogs({ Category, uuid }) {
   const [blogs, setBlogs] = useState([]);

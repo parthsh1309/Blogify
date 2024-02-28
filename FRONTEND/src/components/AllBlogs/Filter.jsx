@@ -84,7 +84,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
           <div className="flex flex-col justify-center items-center">
             <ul className="space-y-2 w-full">
               {filterItems.map((item, index) => (
-                <>
+                <div key={index}>
                   <li
                     className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer "
                     onClick={() => toggleDropdown(index)}
@@ -120,13 +120,13 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
                         ))}
                     </div>
                   )}
-                </>
+                </div>
               ))}
 
               <li>
                 <div className="relative mb-6">
                   <label
-                    for="labels-range-input"
+                    htmlFor="labels-range-input"
                     className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer"
                   >
                     Read Time

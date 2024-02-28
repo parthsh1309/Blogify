@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { SearchBar } from "..";
 import blogService from "../../databaseService/Blog";
-import BlogStructure from "./BlogStucture02";
+import {BlogStructure02} from "../index";
 import Pagination from "./Pagination";
 
 function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
@@ -51,7 +51,7 @@ function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
 
       <div className="sm-w-full flex flex-wrap gap-3 p-4 justify-center rounded-2xl">
         {blogs?.map((blog) => (
-          <BlogStructure
+          <BlogStructure02
             key={blog.uuid}
             blog={blog}
             classNameTitle={"text-white sm:text-3xl text-2xl"}

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import blogService from "../../databaseService/Blog";
 import { useLocation } from "react-router-dom";
-import BlogStructure from "./BlogStructure";
+import {BlogStructure} from "../index";
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);

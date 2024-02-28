@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import blogService from "../../databaseService/Blog";
 import { Link } from "react-router-dom";
-import BlogSructure from "../AllBlogs/BlogStucture02";
+import {BlogStructure02} from "../index";
 
 function TopLikedBlogs() {
   const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ function TopLikedBlogs() {
 
       <div className="flex flex-wrap gap-3">
         {blogs.map((blog) => (
-          <BlogSructure blog={blog} classNameTitle={"text-2xl text-white"}/>  
+          <BlogStructure02 blog={blog} classNameTitle={"text-2xl text-white"} key={blog.uuid}/>  
         ))}
 
         {/* TODO: Add pagination */}
