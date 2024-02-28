@@ -4,6 +4,7 @@ import blogService from "../../databaseService/Blog";
 import LikeBtn from "../Buttons/LikeBtn";
 import DislikeBtn from "../Buttons/DislikeBtn";
 import Comment from "./Comment";
+import MoreBlogs from "./MoreBlogs.jsx";
 
 function Blog() {
   const { blogId } = useParams();
@@ -13,7 +14,6 @@ function Blog() {
   useEffect(() => {
     blogService.getSingleBlog(blogId).then((res) => {
       if (!res) setError({ error: true, msg: res.error || "Blog not found" });
-      console.log(res.data);
       setBlog(res.data);
 
       setLoading(false);
@@ -57,7 +57,10 @@ function Blog() {
         className="border-t border-gray-600 my-4 w-4/5 m-auto
       "
       />
-     <Comment uuid={blog.uuid}/>
+      <div className="w-full flex flex-wrap sm:justify-around">
+        <Comment uuid={blog.uuid} />
+        <MoreBlogs Category={blog.category[0]} uuid={blog.uuid} />
+      </div>
     </div>
   );
 }

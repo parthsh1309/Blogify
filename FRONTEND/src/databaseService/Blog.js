@@ -96,7 +96,6 @@ class BlogService {
 
   async addComments(blogId, content) {
     try {
-      console.log(content);
       const response = await axios.post(
         `${this.databaseBaseUrl}blog/api/v1/blog-comment/${blogId}`,
         { content },

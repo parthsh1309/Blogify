@@ -20,7 +20,6 @@ const getblogComments = async (req, res) => {
       throw new ApiError(404, "Blog not found");
     }
 
-    console.log(blogComments);
     // return the response
     return res
     .status(200)

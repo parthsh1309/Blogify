@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function BlogSructure({blog, classNamePrimary, classNameTitle,classNameText, textMaxLength=100}) {
+function BlogStructure({blog, classNamePrimary,classNameSecondary ,classNameTitle,classNameText, textMaxLength=100}) {
   return (
     // <div>
       <Link
       to={`/blog/${blog.uuid}`}
         className={` w-full h-auto bg-no-repeat bg-left bg-cover p-3 ${classNamePrimary} `}
-        style={{ backgroundImage: `url(${blog.coverImage.url})` }}
+        style={{ backgroundImage: `url(${blog.coverImage.url })` }}
         // key={blog.uuid}
       >
-        <div className="sm:w-1/2 w-2/3 bg-gray-700/80 dark:bg-slate-950/80 px-3 py-5 space-y-2 rounded-xl flex-shrink-0 ">
+        <div className={` ${classNameSecondary}sm:w-1/2 w-2/3 bg-gray-700/80 dark:bg-slate-950/80 px-3 py-5 space-y-2 rounded-xl flex-shrink-0 `}>
           <div className=" text-gray-400 pb-4">
             {new Date(blog.createdAt).getDate() +
               "/" +
@@ -42,4 +42,4 @@ function BlogSructure({blog, classNamePrimary, classNameTitle,classNameText, tex
   );
 }
 
-export default BlogSructure;
+export default BlogStructure;

@@ -15,7 +15,6 @@ const blogComment = async (req, res) => {
     // Get the data from body
     // TODO: Add validation
     const { content } = req.body;
-    console.log(content);
 
     // get the Blog post from uuid
     const blog = await Blog.findOne({ uuid: req.params.blogId });
@@ -40,7 +39,7 @@ const blogComment = async (req, res) => {
       }
     );
 
-    
+
 
     // return the response
     return res
