@@ -11,6 +11,8 @@ import blogComment from "../../controllers/blogs/blogComment.js";
 import likeBlog from "../../controllers/blogs/likeBlog.js";
 import deleteBlogComment from "../../controllers/blogs/deleteComment.js";
 import getBlogComments from "../../controllers/blogs/getBlogComments.js";
+import editBlog from "../../controllers/blogs/editBlog.js";
+
 const router = express.Router();
 
 import path from "path";
@@ -41,6 +43,8 @@ router.post(
 router.get("/all-blogs", displayAllBlogs);
 
 router.get("/blog/:blogId", displaySingleBlog);
+
+router.put("/edit-blog/:blogId", verifyJWT, editBlog);
 
 router.delete("/delete-blog/:blogId", verifyJWT, deleteBlog);
 
