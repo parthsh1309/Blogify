@@ -3,9 +3,12 @@ import { SearchBar } from "..";
 import blogService from "../../databaseService/Blog";
 import {BlogStructure02} from "../index";
 import Pagination from "./Pagination";
+import { useSelector } from "react-redux";
 
 function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
   const [blogs, setBlogs] = useState([]);
+  const refreshState = useSelector((state) => state.auth.refreshStatus);
+
 
   useEffect(() => {
     // checking if languages and categories are empty if yes then set them to default
@@ -31,10 +34,11 @@ function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
       .getBlogs(false, category, 8, "-createdAt", language, filters.Time)
       .then((res) => {
         // console.log(res.data);
+        console.log(res.data);
         return setBlogs(res.data);
       })
       .catch((err) => console.log(err));
-  }, [filters]);
+  }, [filters, refreshState]);
 
   return (
     <div className="sm:w-3/4">

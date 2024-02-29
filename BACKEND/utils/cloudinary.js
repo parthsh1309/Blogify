@@ -28,12 +28,12 @@ const uploadCloudinaryFile = async (fileURL) => {
     }
     
     // delete the image from local storage
-    fs.unlinkSync(fileURL);
+    // fs.unlinkSync(fileURL);
     
     // return the response
     return fileResponse;
   } catch (error) {
-    fs.unlinkSync(fileURL);
+    // fs.unlinkSync(fileURL);
     throw new ApiError(501, error.message);
   }
 };

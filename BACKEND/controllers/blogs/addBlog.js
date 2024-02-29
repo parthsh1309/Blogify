@@ -17,8 +17,7 @@ const createBlog = async (req, res) => {
     const { title, text, inProduction } = req.body;
 
     // TODO: Add cover image here from req.files
-    const coverImgUrl = req.file.path
-      // "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg";
+    const coverImgUrl = req.file?.path || "https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg"
 
     // if there's no cover image
     if (!coverImgUrl) {
@@ -27,7 +26,7 @@ const createBlog = async (req, res) => {
 
 
     // Upload image to cloudinary
-    const coverImg = await uploadCloudinaryFile(coverImgUrl);
+    const coverImg = await uploadCloudinaryFile(coverImgUrl) 
 
     // if image is not uploaded
     if (!coverImg) {

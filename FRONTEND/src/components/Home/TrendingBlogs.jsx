@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import blogService from "../../databaseService/Blog";
 import { Link } from "react-router-dom";
 import {KebabMenu} from "../index";
+import { useSelector } from "react-redux";
 
 function TrendingBlogs() {
   // TODO: sort posts as per Views
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  const refreshState = useSelector((state) => state.auth.refreshStatus);
+
 
   useEffect(() => {
     blogService
@@ -19,7 +22,7 @@ function TrendingBlogs() {
         console.log(err);
       });
     setLoading(false);
-  }, []);
+  }, [refreshState]);
   return (
     <div className="sm:w-1/3">
       <div className="space-y-2 mb-8">
@@ -31,7 +34,7 @@ function TrendingBlogs() {
         {blogs.map((blog) => (
           <div key={blog.uuid} >
             <Link className="h-36 w-full flex gap-3 relative">
-              <KebabMenu blogId={blog.uuid}/>
+              <KebabMenu blogId={blog.uuid} userId={blog.author._id}/>
               <img
                 src={blog.coverImage.url}
                 className="h-full w-2/5"

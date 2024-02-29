@@ -14,7 +14,7 @@ function BlogStructure({
 }) {
   return (
     <div className={` relative ${classNamePrimary} `}>
-      <KebabMenu blogId={blogs.uuid}/>
+      <KebabMenu blogId={blogs.uuid} userId={blogs.author._id}/>
       <img src={blogs.coverImage.url} className="h-full w-full rounded-xl " loading="eager"/>
       <div
         className={`absolute bottom-4 left-2/4 transform -translate-x-1/2 w-5/6 bg-gray-700/80 dark:bg-slate-950/80 p-3 space-y-2 rounded-xl flex-shrink-0 ${classNameSecondary}`}

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import blogService from "../../databaseService/Blog";
 import { Link } from "react-router-dom";
 import {BlogStructure02} from "../index";
+import { useSelector } from "react-redux";
 
 function TopLikedBlogs() {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  const refreshState = useSelector((state) => state.auth.refreshStatus);
 
   useEffect(() => {
     blogService
@@ -18,7 +20,7 @@ function TopLikedBlogs() {
         console.log(err);
       });
     setLoading(false);
-  }, []);
+  }, [refreshState]);
 
   return loading ? (
     <div>Loading...</div>

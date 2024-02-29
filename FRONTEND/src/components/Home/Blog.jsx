@@ -6,11 +6,14 @@ import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import blogService from "../../databaseService/Blog";
 import { useLocation } from "react-router-dom";
 import {BlogStructure} from "../index";
+import { useSelector } from "react-redux";
 
 function Blog() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const location = useLocation();
+  const refreshState = useSelector((state) => state.auth.refreshStatus);
+
 
   useEffect(() => {
     try {
@@ -24,7 +27,7 @@ function Blog() {
       console.log(error);
     }
     setLoading(false);
-  }, [location]);
+  }, [location, refreshState]);
 
   const options = {
     type: "loop",

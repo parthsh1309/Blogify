@@ -4,6 +4,8 @@ import { Navigate } from "react-router-dom";
 export const initialState = {
   userData: null,
   status: false,
+  // for refreshing the blog when user delete or edit something
+  refreshStatus: false,
 };
 
 export const authSlice = createSlice({
@@ -17,9 +19,12 @@ export const authSlice = createSlice({
       state.status = false;
       state.userData = null;
     },
+    refresh: (state, actions) => {
+      state.refreshStatus = !state.refreshStatus;
+    }
   },
 });
 
-export const { login, logout } = authSlice.actions;
+export const { login, logout,refresh } = authSlice.actions;
 
 export default authSlice.reducer;

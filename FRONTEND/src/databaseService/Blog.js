@@ -121,6 +121,20 @@ class BlogService {
       return error.response.data.error;
     }
   }
+  async deleteBlog(blogId) {
+    try {
+      const response = await axios.delete(
+        `${this.databaseBaseUrl}blog/api/v1/delete-blog/${blogId}`,{withCredentials: true},
+      );
+      if (response) {
+        return response.data;
+      }
+      throw new Error("Unable to delete blog");
+    } catch (error) {
+      console.log(error.response);
+      return error.response.data.error;
+    }
+  }
 }
 
 const blogService = new BlogService();

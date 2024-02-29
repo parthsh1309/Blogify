@@ -1,12 +1,17 @@
 import React, { useEffect, useId, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import CopyToClipboard from "react-copy-to-clipboard";
 import conf from "../../conf/conf";
-
-function KebabMenu({ blogId }) {
+import { useDispatch, useSelector } from "react-redux";
+import blogService from "../../databaseService/Blog";
+import { refresh } from "../../features/authSlice";
+function KebabMenu({ blogId, userId }) {
   const [dropdown, setDropdown] = useState(false);
   const id = useId();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const auth = useSelector((state) => state.auth);
 
   const toggleDropdown = () => {
     setDropdown(!dropdown);
@@ -31,6 +36,7 @@ function KebabMenu({ blogId }) {
       function: () => {
         console.log("Edit");
       },
+      authenticated: true,
     },
     {
       name: "Share",
@@ -38,18 +44,24 @@ function KebabMenu({ blogId }) {
         navigator.clipboard.writeText(`${conf.copyLinkUrl}${blogId}`);
         setDropdown(false);
       },
+      authenticated: false,
+    },
+    {
+      name: "Delete",
+      function: () => {
+        blogService.deleteBlog(blogId).then((res) => {
+          console.log(res);
+          dispatch(refresh());
+        });
+      },
+      authenticated: true,
     },
     {
       name: "More Like This",
       function: () => {
         navigate("/all-blogs");
       },
-    },
-    {
-      name: "Delete",
-      function: () => {
-        console.log("Delete");
-      },
+      authenticated: false,
     },
   ];
 
@@ -81,14 +93,25 @@ function KebabMenu({ blogId }) {
           aria-labelledby="dropdownMenuIconButton"
         >
           <li>
-            {dropMenuItems.map((item) => (
-              <button
-                className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
-                onClick={item.function}
-              >
-                {item.name}
-              </button>
-            ))}
+            {dropMenuItems.map((item) =>
+              item.authenticated ? (
+                auth?.userData?.data._id === userId && item.authenticated ? (
+                  <button
+                    className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
+                    onClick={item.function}
+                  >
+                    {item.name}
+                  </button>
+                ) : null
+              ) : (
+                <button
+                  className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
+                  onClick={item.function}
+                >
+                  {item.name}
+                </button>
+              )
+            )}
           </li>
         </ul>
       </div>

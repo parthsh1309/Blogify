@@ -16,12 +16,11 @@ const router = express.Router();
 import path from "path";
 
 // Define the destination directory
-const destinationDirectory = path.resolve( './../uploads');
 
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, destinationDirectory);
+    cb(null, '/uploads');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
@@ -29,7 +28,7 @@ const storage = multer.diskStorage({
 });
 
 // Create multer instance
-const upload = multer({ storage });
+const upload = multer({ storage:storage});
 
 
 router.post(
