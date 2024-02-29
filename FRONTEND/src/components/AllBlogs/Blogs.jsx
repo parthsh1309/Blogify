@@ -34,7 +34,6 @@ function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
       .getBlogs(false, category, 8, "-createdAt", language, filters.Time)
       .then((res) => {
         // console.log(res.data);
-        console.log(res.data);
         return setBlogs(res.data);
       })
       .catch((err) => console.log(err));
