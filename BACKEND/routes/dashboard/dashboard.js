@@ -5,8 +5,8 @@ import userLikedBlogs from "../../controllers/dashboard/userLikedBlogs.js";
 
 const router = express.Router();
 
-router.get("/userBlogs", verifyJWT, getUserBlogs);
+router.get("/getUserBlogs", verifyJWT, getUserBlogs);
 
-router.get("/userLikedBlogs", verifyJWT, userLikedBlogs);
+router.get("/getUserLikedBlogs", verifyJWT, userLikedBlogs);
 
 export default router;
