@@ -61,6 +61,19 @@ export class AuthService {
       return false;
     }
   }
+
+  async editProfile(data) {
+    try {
+      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/edit-profile`,data,{withCredentials: true});
+      if(response){
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error.response);
+      console.log(`authService :: editProfile :: ${error.response.data.error}`);
+      return false;
+    }
+  }  
 }
 
 const authService = new AuthService();
