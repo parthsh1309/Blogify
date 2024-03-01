@@ -5,6 +5,10 @@ import jwt from "jsonwebtoken";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
+  uuid: {
+    type: String,
+    required: true,
+  },
   username: {
     type: String,
     required: true,

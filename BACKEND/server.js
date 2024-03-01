@@ -37,12 +37,16 @@ app.use(session(sessionConfig));
 
 import auth from "./routes/auth/auth.js";
 import blog from "./routes/blogs/blog.js";
+import dashboard from "./routes/dashboard/dashboard.js";
 
 // auth api
 app.use("/auth/api/v1/", auth);
 
 // Blogs api
 app.use("/blog/api/v1/", blog);
+
+// dashboard api
+app.use("/dashboard/api/v1/", dashboard);
 
 
 const PORT = process.env.PORT || "3000";

@@ -1,4 +1,5 @@
 import asyncHandler from "express-async-handler";
+import { v4 as uuidv4 } from "uuid";
 import User from "../../models/User.js";
 import {ApiResponse} from "../../utils/apiResponse.js";
 import {ApiError} from "../../utils/apiError.js";
@@ -26,6 +27,7 @@ const createUser = async (req, res) => {
     // if user dont exists
     // save the details in the database
     const user = await User.create({
+      uuid: uuidv4(),
       username,
       email,
       password,
