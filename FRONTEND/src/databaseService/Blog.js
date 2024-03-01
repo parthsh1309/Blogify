@@ -135,6 +135,23 @@ class BlogService {
       return error.response.data.error;
     }
   }
+
+  async editBlog(blogId, data) {
+    try {
+      console.log(data);
+      const response = await axios.put(
+        `${this.databaseBaseUrl}blog/api/v1/edit-blog/${blogId}`,
+        data,
+        { withCredentials: true }
+      )
+      if (response) {
+        return response.data;
+      }
+    } catch (error) {
+      console.log(error);
+      return error.response.data.error;
+    }
+  }
 }
 
 const blogService = new BlogService();

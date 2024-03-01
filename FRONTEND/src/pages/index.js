@@ -5,6 +5,7 @@ import Signup from "./Signup";
 import AddBlog from "./AddBlog";
 import AllBlogs from "./AllBlogs";
 import Blog from "./Blog"
+import EditBlog from "./EditBlog";
 export {
     Home,
     About,
@@ -12,5 +13,6 @@ export {
     Signup,
     AddBlog,
     AllBlogs,
-    Blog
+    Blog,
+    EditBlog
 };

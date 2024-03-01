@@ -1,6 +1,7 @@
 import React, { forwardRef } from "react";
 
 function SelectInput({ list = [], label, name,register,value }, ref) {
+  console.log(value);
   return (
     <>
       <label

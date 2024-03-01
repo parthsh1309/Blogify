@@ -1,26 +1,37 @@
 import React, { useEffect, useState } from "react";
 import RTE from "../RTE";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import conf from "../../conf/conf";
 import { FloatingInput, SelectInput, SecondaryBtn } from "../index";
 import blogService from "../../databaseService/Blog";
 import { useNavigate } from "react-router-dom";
+import authService from "../../databaseService/Auth";
 function PostForm({ post }) {
   const [btntext, setBtnText] = useState("Create Blog");
   const [imgUploaded, setImgUploaded] = useState({});
-  const { control, handleSubmit, register, getValues, watch } = useForm({
-    defaultValues: {
-      title: post?.title,
-      text: post?.text,
-      category: post?.category,
-      language: post?.language,
-      coverImage: post?.coverImage,
-      inProduction: post?.inProduction,
-      time: post?.time,
-    },
-  });
+  const { control, handleSubmit, register, getValues, setValue, reset } =
+    useForm({
+      // defaultValues: {
+      //   title: post?.title || "",
+      //   text: post?.text || "",
+      //   category: post?.category || "",
+      //   language: post?.language || "English",
+      //   coverImage: post?.coverImage || "",
+      //   inProduction: post?.inProduction || false,
+      //   time: post?.time || "",
+      // },
+    });
 
-  const navigate = useNavigate();
+    const navigate = useNavigate();
+
+  useEffect(() => {
+    if (post) {
+      console.log("Setting default values:", post);
+      Object.keys(post).forEach((key) => {
+        setValue(key, post[key]);
+      });
+    }
+  }, [post, setValue]);
 
   const blogCategory = [
     "Technology",
@@ -32,6 +43,13 @@ function PostForm({ post }) {
 
   const submitForm = async (data, e) => {
     //   check if there's existing post if yes then update the form
+    if (post) {
+      const response = await blogService.editBlog(post.uuid, data);
+      console.log(response);
+      navigate(`/blog/${post.uuid}`);
+      return;
+    }
+
     // else create a new form
     const formData = new FormData();
     formData.append("coverImage", data.coverImage[0]);
@@ -46,7 +64,7 @@ function PostForm({ post }) {
     if (response) {
       console.log(response);
       // TODO: navigate to Particular  Blog page
-      navigate("/")
+      navigate(`/blog/${post.uuid}`);
     }
   };
   return (
@@ -63,7 +81,8 @@ function PostForm({ post }) {
         <div className=" sm:w-2/5 w-full space-y-4">
           <FloatingInput
             text={"Please Enter Title"}
-            value={post ? getValues("title") : null}
+            // value={post ? post.title : ""}
+            onChange={(e) => setValue("title", e.target.value)}
             {...register("title")}
           />
 
@@ -72,7 +91,7 @@ function PostForm({ post }) {
             label={"Select Category Of Blog"}
             name={"category"}
             register={register}
-            value={getValues("category")}
+            // value={post ? getValues("category") : null}
           />
 
           <SelectInput
@@ -80,19 +99,18 @@ function PostForm({ post }) {
             label={"Select Language Of Blog"}
             name={"language"}
             register={register}
-            
-            value={getValues("language")}
+            // value={post ? getValues("language") : null}
           />
 
           <FloatingInput
-          type={"number"}
+            type={"number"}
             text={"Please Enter Reading Time In Minutes"}
-            value={post ? getValues("title") : null}
+            // value={post ? getValues("time") : null}
             {...register("time")}
           />
         </div>
 
-        <div className="sm:w-2/5 w-full h-full space-y-4">
+        {!post&&<div className="sm:w-2/5 w-full h-full space-y-4">
           <div className="flex items-center justify-center w-full">
             <label
               for="dropzone-file"
@@ -114,14 +132,6 @@ function PostForm({ post }) {
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>
-                {/* {imgUploaded?
-               ( <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>):(<p>Please Upload Cover Image</p>}) */}
 
                 {!imgUploaded.name ? (
                   <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
@@ -149,16 +159,14 @@ function PostForm({ post }) {
               />
             </label>
           </div>
-        </div>
+        </div>}
       </div>
-
       <div className="w-full flex flex-col items-center justify-center">
-        
         <RTE
           control={control}
           name={"text"}
           defaultValue={
-            post ? getValues("text") : "<p>Shahi Paneer is a popular Indian dish known for its rich and creamy texture, combined with aromatic spices and tender paneer (Indian cottage cheese).</p><h2>Ingredients:</h2><ul><li>Paneer (Indian cottage cheese)</li><li>Tomatoes</li><li>Onions</li><li>Cashew nuts</li><li>Yogurt</li><li>Cream</li><li>Green cardamom</li><li>Cinnamon</li><li>Cloves</li><li>Ginger-garlic paste</li><li>Coriander powder</li><li>Red chili powder</li><li>Turmeric powder</li><li>Saffron</li><li>Oil or ghee (clarified butter)</li><li>Fresh coriander leaves (for garnish)</li></ul><h2>Preparation:</h2><ol><li>Start by frying the paneer cubes until they turn golden brown. Set aside.</li><li>In a separate pan, heat oil or ghee and add whole spices like green cardamom, cinnamon, and cloves.</li><li>Add finely chopped onions and sauté until they turn golden brown.</li><li>Next, add ginger-garlic paste and cook until the raw smell disappears.</li><li>Add chopped tomatoes and cook until they become soft and mushy.</li><li>Grind cashew nuts into a fine paste and add it to the pan.</li><li>Now, add yogurt, cream, and powdered spices like coriander, red chili, and turmeric powder.</li><li>Add saffron strands soaked in warm milk for a rich flavor and vibrant color.</li><li>Finally, add the fried paneer cubes and simmer the gravy until it thickens.</li><li>Garnish with fresh coriander leaves and serve hot with naan or rice.</li></ol><h2>Conclusion:</h2><p>Shahi Paneer is a royal delicacy that is enjoyed by people of all ages. Its creamy texture and flavorful spices make it a perfect dish for special occasions or everyday meals.</p><p>Whether you're a fan of Indian cuisine or trying it for the first time, Shahi Paneer is sure to delight your taste buds and leave you craving for more.</p>"
+            post ? post.text : "<h1>Please Enter Blog Content Here</h1>"
           }
         />
 
@@ -172,7 +180,6 @@ function PostForm({ post }) {
                 : setBtnText("Create Blog")
             }
             className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded  dark:bg-gray-700 dark:border-gray-600"
-            checked={getValues("inProduction")}
             {...register("inProduction")}
           />
           <label
@@ -185,7 +192,7 @@ function PostForm({ post }) {
       </div>
 
       <SecondaryBtn
-        children={btntext}
+        children={post ? "Update Blog" : btntext}
         type="submit"
         className="w-2/3 justify-center m-auto py-3 text-xl font-roboSlab"
       />

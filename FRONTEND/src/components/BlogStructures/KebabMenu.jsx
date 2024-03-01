@@ -34,7 +34,7 @@ function KebabMenu({ blogId, userId }) {
     {
       name: "Edit",
       function: () => {
-        console.log("Edit");
+        navigate(`/edit-blog/${blogId}`);
       },
       authenticated: true,
     },

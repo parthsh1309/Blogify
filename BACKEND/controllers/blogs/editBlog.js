@@ -14,7 +14,6 @@ const editBlog = async (req, res) => {
     if(!blog){
       throw new ApiError(404, "Blog not found");
     }
-    console.log(blog);
 
     // check if the user is authorized to edit the blog
     if (blog.author._id.toString() !== req.user._id.toString()) {
