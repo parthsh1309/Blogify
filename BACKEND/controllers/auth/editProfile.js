@@ -4,28 +4,26 @@ import { ApiResponse } from "../../utils/apiResponse.js";
 
 const editProfile = async (req, res) =>{
     try {
-        console.log(req.params);
         // check if user is authenticated
         if(!req.user){
             throw new ApiError(401, "User is not authenticated")
         }
         // get data from body
-        const {uuid} = req.params;
         const {username, email} = req.body;
 
         // check if user exists
-        const existingUser = await User.findOne({uuid});
+        const existingUser = await User.findById(req.user._id);
         if(!existingUser){
             throw new ApiError(404, "User not found")
         }
 
         // check if user is authorized
-        if(req.user.uuid !== uuid){
+        if(req.user.uuid !== existingUser.uuid){
             throw new ApiError(401, "You are not authorized")
         }
 
         // update the user
-        const user = await User.findOneAndUpdate({uuid}, {username, email});
+        const user = await User.findByIdAndUpdate(req.user._id, {username, email});
 
         if(!user){
             throw new ApiError(404, "User not found")
