@@ -20,6 +20,6 @@ router.post("/refreshToken", refreshAccessToken);
 
 router.get("/getCurrentUser", verifyJWT, currentUser);
 
-router.put("/editProfile/:uuid", verifyJWT, editProfile);
+router.put("/editProfile", verifyJWT, editProfile);
 
 export default router;

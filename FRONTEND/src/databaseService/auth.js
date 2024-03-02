@@ -64,7 +64,7 @@ export class AuthService {
 
   async editProfile(data) {
     try {
-      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/edit-profile`,data,{withCredentials: true});
+      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/editProfile`,data,{withCredentials: true});
       if(response){
         return response.data;
       }
