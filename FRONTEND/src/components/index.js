@@ -22,6 +22,7 @@ import DislikeBtn from "./Buttons/DislikeBtn";
 import BlogStructure02 from "./BlogStructures/BlogStucture02";
 import BlogStructure from "./BlogStructures/BlogStructure";
 import KebabMenu from "./BlogStructures/KebabMenu";
+import ProfileComponent from "./Dashboard/Profile";
 export {
   PrimaryBtn,
   Navbar,
@@ -46,6 +47,7 @@ export {
   DislikeBtn,
   BlogStructure02,
   BlogStructure,
-  KebabMenu
+  KebabMenu,
+  ProfileComponent
 };
 

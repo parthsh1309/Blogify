@@ -57,7 +57,6 @@ function Login() {
             type="email"
             text="Email"
             autoComplete="off"
-            value="test2@gmail.com"
             {...register("email", { required: true })}
           />
           <FloatingInput

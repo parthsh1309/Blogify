@@ -1,6 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { Link, NavLink } from "react-router-dom";
+import {  NavLink } from "react-router-dom";
 
 function AsideNav() {
   const listItems = [
@@ -26,7 +25,7 @@ function AsideNav() {
   ];
   return (
     <aside
-      class="h-screen sm:w-1/4 bg-gray-700 dark:bg-slate-800 relative space-y-5"
+      class="sm:h-screen sm:w-1/4 bg-gray-700 dark:bg-slate-800 relative space-y-5"
       aria-label="Sidebar"
     >
       <div className="flex flex-col justify-center items-center">
@@ -48,6 +47,7 @@ function AsideNav() {
         <ul className="flex gap-2 items-center flex-col w-full">
           {listItems.map((item, index) => (
               <NavLink
+                key={index}
                 to={item.url}
                 className={`w-full text-center  px-4 py-2 text-lg  font-roboSlabtext-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700/30 dark:text-gray-200 dark:hover:text-white`}
               >

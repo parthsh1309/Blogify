@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import { useSelector } from "react-redux";
 import authService from "../../databaseService/Auth";
+import { Link } from "react-router-dom";
 
 function ProfileData({ isProfileOpen, closeProfile }) {
   const auth = useSelector((state) => state.auth);
@@ -35,7 +36,7 @@ function ProfileData({ isProfileOpen, closeProfile }) {
   const profileItem = [
     {
       name: "Dashboard",
-      url: "#",
+      url: "/Dashboard/Profile",
       authStatus: auth.status,
     },
     {
@@ -90,14 +91,14 @@ function ProfileData({ isProfileOpen, closeProfile }) {
       >
         {profileItem.map((item) => (
           <li key={item.name} className="w-full text-center">
-            <a
-              href={item.url}
+            <Link
+              to={item.url}
               className={`${
                 item.authStatus ? "block" : "hidden"
               }  px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white`}
             >
               {item.name}
-            </a>
+            </Link>
           </li>
         ))}
         <li key="Logout" className="w-full text-center">

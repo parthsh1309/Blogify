@@ -11,17 +11,24 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import { Home, About, Login, Signup, AddBlog, AllBlogs, Blog,EditBlog } from "./pages";
+import {
+  Home,
+  About,
+  Login,
+  Signup,
+  AddBlog,
+  AllBlogs,
+  Blog,
+  EditBlog,
+  LikedBlogs,
+  Profile,
+  UserBlogs,
+} from "./pages";
 import Protected from "./components/AuthLayout.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route
-      path="/"
-      element={
-          <App />
-      }
-    >
+    <Route path="/" element={<App />}>
       <Route
         path=""
         element={
@@ -69,7 +76,7 @@ const router = createBrowserRouter(
             <AddBlog />
           </Protected>
         }
-        />
+      />
 
       <Route
         path="/edit-blog/:blogId"
@@ -78,13 +85,39 @@ const router = createBrowserRouter(
             <EditBlog />
           </Protected>
         }
-        />
+      />
 
       <Route
         path="/blog/:blogId"
         element={
           <Protected authentication={false}>
-            < Blog/>
+            <Blog />
+          </Protected>
+        }
+      />
+
+      <Route
+        path="/Dashboard/Profile"
+        element={
+          <Protected authentication={true}>
+            <Profile />
+          </Protected>
+        }
+      />
+
+      <Route
+        path="/dashboard/likedBlogs"
+        element={
+          <Protected authentication={true}>
+            <LikedBlogs />
+          </Protected>
+        }
+      />
+      <Route
+        path="/dashboard/userBlogs"
+        element={
+          <Protected authentication={true}>
+            <UserBlogs />
           </Protected>
         }
       />
