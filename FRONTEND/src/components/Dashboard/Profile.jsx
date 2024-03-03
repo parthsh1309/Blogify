@@ -8,33 +8,27 @@ import authService from "../../databaseService/Auth";
 
 function Profile() {
   const [isEditable, setIsEditable] = useState(false);
-  //   const [userDetails, setUserDetails] = useState({});
-
   const { register, handleSubmit, setValue } = useForm();
   const authData = useSelector((state) => state.auth).userData.data;
 
-  const useEffectFunc = ()=>{
+  useEffect(() => {
     if (authData) {
-        //   setUserDetails(response.data);
-        setValue("username", authData.username);
-        setValue("email", authData.email);
-      }
-  }
-
-  useEffect(async () => {
-     useEffectFunc();
-
-    return () => {};
-  }, []);
+      setValue("username", authData.username);
+      setValue("email", authData.email);
+    }
+  }, [authData, setValue]);
 
   const onSubmit = (data) => {
-   authService.editProfile(data).then((response) => {
-     console.log(response);
-     setIsEditable(false);
-   }).catch((error)=>{
-     console.log(error);
-   })
+    authService.editProfile(data)
+      .then((response) => {
+        console.log(response);
+        setIsEditable(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+
   return (
     <div className="sm:flex space-y-5">
       <AsideNav />
