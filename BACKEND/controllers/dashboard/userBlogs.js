@@ -2,16 +2,20 @@ import User from "../../models/User.js";
 import { ApiError } from "../../utils/apiError.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
 
-const getUserBlogs = (req, res) => {
+const getUserBlogs = async(req, res) => {
   try {
     // get the user details from req
     // get the blogs from the backend
-    const blogs = User.find({ uuid: req.params.uuid })
-      .select({
-        path: "blogs",
-        select: "uuid title description coverImage",
-      })
+    const blogs = await User.findById(req.user._id)
+    .select("blogPosts")
+    .populate({
+      path: "blogPosts",
+      select: "uuid title description coverImage",
+    })
+      
       .exec();
+
+      console.log(blogs);
 
     // if blogs are not found
     if (!blogs) {

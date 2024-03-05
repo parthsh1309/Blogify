@@ -6,8 +6,10 @@ const userLikedBlogs = (req, res) => {
   try {
     // get the user details from req
     // get the liked blogs from the database
-    const likedBlogs = User.find({ uuid: req.params.uuid })
+    const likedBlogs = User.findById(req.user._id)
       .select({
+        path: "likedBlogs",
+      }).populate({
         path: "likedBlogs",
         select: "uuid title description coverImage",
       })

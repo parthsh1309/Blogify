@@ -45,7 +45,7 @@ function AsideNav() {
           {authData.email}
         </span>
         <span className="text-gray-400 text-sm font-mont pt-2">
-          &#9830; 1 Blog Posts
+          &#9830; {authData.blogPosts?.length} Blog Posts
         </span>
       </div>
 
