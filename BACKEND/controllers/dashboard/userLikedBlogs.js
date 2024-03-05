@@ -11,12 +11,11 @@ const userLikedBlogs = async(req, res) => {
         path: "likedBlogs",
       }).populate({
         path: "likedBlogs",
-        // select: "uuid title description coverImage",
+        select: "uuid title description coverImage text time category",
         populate: { path: "author", select: "username" },
       })
       .exec();
 
-      console.log(likedBlogs);
     // if liked blogs are not found
     if (!likedBlogs) {
       throw new ApiError(404, "Liked blogs not found");

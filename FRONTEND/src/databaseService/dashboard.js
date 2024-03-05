@@ -28,6 +28,10 @@ class DashboardService {
         `${this.databaseBaseUrl}dashboard/api/v1/getUserLikedBlogs`,
         { withCredentials: true }
       );
+
+      if (response) {
+        return response.data;
+      }
     } catch (error) {
       console.log(`dashboardService :: getLikedBlogs :: ${error}`);
     }

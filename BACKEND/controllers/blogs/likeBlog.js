@@ -2,6 +2,7 @@ import asyncHandler from "express-async-handler";
 import { ApiError } from "../../utils/apiError.js";
 import Blog from "../../models/blog.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
+import User from "../../models/User.js";
 
 const likeBlog = async (req,res) => {
   try {
@@ -15,8 +16,10 @@ const likeBlog = async (req,res) => {
 
     // if blog is already liked by user dislike it and return response
     let isLiked = blog.likes.includes(req.user._id);
+
     if(isLiked){
         await blog.updateOne({ $pull: { likes: req.user._id } });
+        await User.findByIdAndUpdate(req.user._id, { $pull: { likedBlogs: blog._id } });
         return res
         .status(200)
         .json(new ApiResponse(200, {}, "Blog disliked successfully"));
@@ -24,6 +27,7 @@ const likeBlog = async (req,res) => {
 
     // else like the blog
     await blog.updateOne({ $push: { likes: req.user._id } });
+    await User.findByIdAndUpdate(req.user._id, { $push: { likedBlogs: blog._id } });
 
     // return the response
     return res

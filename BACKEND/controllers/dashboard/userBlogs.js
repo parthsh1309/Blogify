@@ -10,7 +10,7 @@ const getUserBlogs = async(req, res) => {
     .select("blogPosts")
     .populate({
       path: "blogPosts",
-      // select: "uuid title description coverImage text",
+      select: "uuid title description coverImage text time category",
       populate: { path: "author", select: "username" },
     }).exec();
 

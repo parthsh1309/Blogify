@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AsideNav from "./AsideNav";
 import dashboardService from "../../databaseService/dashboard";
+import { BlogStructure02 } from "..";
 
 function UserLikedBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -9,8 +10,7 @@ function UserLikedBlogs() {
       try {
 
         const res = await dashboardService.getLikedBlogs();
-        console.log("blogs", res);
-        setBlogs(res.data); // Update the state with blog posts array
+        setBlogs(res.data.likedBlogs); // Update the state with blog posts array
       } catch (error) {
         console.error("Error fetching user blogs:", error);
       }
@@ -23,7 +23,7 @@ function UserLikedBlogs() {
   console.log("blogs", blogs);
 
   return (
-    <div className="sm:flex space-y-5">
+    <div className="sm:flex relative space-y-5 w-full sm:h-screen">
       <AsideNav />
 
       <div className="sm:w-3/4 overflow-y-scroll ">
