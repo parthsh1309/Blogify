@@ -3,6 +3,7 @@ import {v2 as cloudinary} from "cloudinary"
 import { ApiError } from "../../utils/apiError.js";
 import Blog from "../../models/blog.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
+import User from "../../models/User.js";
 
 const deleteBlog = async (req, res) => {
   try {
@@ -16,6 +17,8 @@ const deleteBlog = async (req, res) => {
     if (!blog) {
       throw new ApiError(404, "Blog not found");
     }
+
+
 
     // if the author of the blog is not the same as the user throw error
     if (blog.author._id.toString() !== req.user._id.toString()) {
@@ -31,6 +34,9 @@ const deleteBlog = async (req, res) => {
 
     // delete the blog
     await Blog.deleteOne({ uuid: req.params.blogId });
+
+    // delete the reference from the user
+    await User.findByIdAndUpdate(req.user._id, { $pull: { blogPosts: blog._id, likedBlogs: blog._id } });
 
     // return the response
     return res
