@@ -44,8 +44,7 @@ function PostForm({ post }) {
   const submitForm = async (data, e) => {
     //   check if there's existing post if yes then update the form
     if (post) {
-      const response = await blogService.editBlog(post.uuid, data);
-      console.log(response);
+      await blogService.editBlog(post.uuid, data);
       navigate(`/blog/${post.uuid}`);
       return;
     }
@@ -62,9 +61,8 @@ function PostForm({ post }) {
 
     const response = await blogService.addBlog(formData);
     if (response) {
-      console.log(response);
       // TODO: navigate to Particular  Blog page
-      navigate(`/blog/${post.uuid}`);
+      navigate(`/blog/${response.data.uuid}`);
     }
   };
   return (

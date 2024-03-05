@@ -17,10 +17,10 @@ function MoreBlogs({ Category, uuid }) {
   return !loading ? (
     <div className="sm:w-2/5 w-full sm:h-screen sm:overscroll-y-scroll">
         <h1 className="text-3xl font-roboSlab text-center text-white">More Like This</h1>
-      <div className="w-full p-4">
+      <div className="w-full p-4 space-y-3">
         {blogs.map((blog) =>
           blog.uuid === uuid ? null : (
-            <BlogStructure blogs={blog} classNameTitle={"text-white sm:text-3xl text-2xl"} key={blog.uuid}/>
+            <BlogStructure blogs={blog} height={96} classNameTitle={"text-white sm:text-3xl text-2xl"} key={blog.uuid}/>
           )
           
         )}

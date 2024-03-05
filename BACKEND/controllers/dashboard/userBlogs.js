@@ -15,7 +15,6 @@ const getUserBlogs = async(req, res) => {
       
       .exec();
 
-      console.log(blogs);
 
     // if blogs are not found
     if (!blogs) {

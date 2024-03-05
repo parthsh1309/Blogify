@@ -11,9 +11,10 @@ function BlogStructure({
   classNameCategory,
   titleMaxLength = 50,
   textMaxLength = 50,
+  height,
 }) {
   return (
-    <div className={` relative ${classNamePrimary} `}>
+    <div className={` relative ${classNamePrimary} ${height?"h-72":""}`}>
       <KebabMenu blogId={blogs.uuid} userId={blogs.author._id}/>
       <img src={blogs.coverImage.url} className="h-full w-full rounded-xl " loading="eager"/>
       <div
