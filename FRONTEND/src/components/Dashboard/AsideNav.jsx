@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {  NavLink } from "react-router-dom";
 
 function AsideNav() {
@@ -12,8 +13,8 @@ function AsideNav() {
       url: "/dashboard/likedBlogs",
     },
     {
-      name: "User Blogs",
-      url: "/dashboard/userBlogs",
+    name: "My Blogs",
+      url: "/dashboard/myBlogs",
     },
     {
         name:"Earnings",
@@ -23,6 +24,13 @@ function AsideNav() {
         url: "/dashboard/settings",
     }
   ];
+
+  const auth = useSelector((state) => state.auth);
+  const [authData, setAuthData] = useState({});
+
+  useEffect(() => {
+    setAuthData(auth.userData.data);
+  },[auth])
   return (
     <aside
       class="sm:h-screen sm:w-1/4 bg-gray-700 dark:bg-slate-800 relative space-y-5"
@@ -32,9 +40,9 @@ function AsideNav() {
         <div className="p-4">
           <img src="" alt="" className="bg-gray-700 w-20 h-20 rounded-full" />
         </div>
-        <span className="text-white text-2xl font-mont ">Username</span>
+        <span className="text-white text-2xl font-mont ">{authData.username}</span>
         <span className="text-gray-500 text-lg font-mont ">
-          UserEmail@gmail.com
+          {authData.email}
         </span>
         <span className="text-gray-400 text-sm font-mont pt-2">
           &#9830; 1 Blog Posts

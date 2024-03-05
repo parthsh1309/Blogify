@@ -23,7 +23,7 @@ const editProfile = async (req, res) =>{
         }
 
         // update the user
-        const user = await User.findByIdAndUpdate(req.user._id, {username, email});
+        const user = await User.findByIdAndUpdate(req.user._id, {username, email}).select("_id uuid username email");
 
         if(!user){
             throw new ApiError(404, "User not found")

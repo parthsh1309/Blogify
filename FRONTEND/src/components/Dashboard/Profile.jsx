@@ -3,13 +3,15 @@ import AsideNav from "./AsideNav";
 import FloatingInput from "../Inputs/FloatingInput";
 import SecondaryBtn from "../Buttons/SecondaryBtn";
 import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import authService from "../../databaseService/Auth";
+import { editDetails } from "../../features/authSlice";
 
 function Profile() {
   const [isEditable, setIsEditable] = useState(false);
   const { register, handleSubmit, setValue } = useForm();
   const authData = useSelector((state) => state.auth).userData.data;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (authData) {
@@ -21,8 +23,10 @@ function Profile() {
   const onSubmit = (data) => {
     authService.editProfile(data)
       .then((response) => {
-        console.log(response);
-        setIsEditable(false);
+        authService.getCurrentUser().then((userData) => {
+          setIsEditable(false);
+          dispatch(editDetails({ data: userData.data.user }));
+        })
       })
       .catch((error) => {
         console.log(error);

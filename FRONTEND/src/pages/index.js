@@ -8,7 +8,7 @@ import Blog from "./Blog"
 import EditBlog from "./EditBlog";
 import LikedBlogs from "./Dashboard/LikedBlogs";
 import Profile from "./Dashboard/Profile";
-import UserBlogs from "./Dashboard/UserBlogs";
+import MyBlogs from "./Dashboard/MyBlogs";
 export {
     Home,
     About,
@@ -20,5 +20,5 @@ export {
     EditBlog,
     LikedBlogs,
     Profile,
-    UserBlogs
+    MyBlogs
 };

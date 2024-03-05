@@ -23,6 +23,8 @@ import BlogStructure02 from "./BlogStructures/BlogStucture02";
 import BlogStructure from "./BlogStructures/BlogStructure";
 import KebabMenu from "./BlogStructures/KebabMenu";
 import ProfileComponent from "./Dashboard/Profile";
+import UserLikedBlogs from "./Dashboard/UserLikedBlogs";
+import MyBlogsComponent from "./Dashboard/MyBlogs";
 export {
   PrimaryBtn,
   Navbar,
@@ -48,6 +50,10 @@ export {
   BlogStructure02,
   BlogStructure,
   KebabMenu,
-  ProfileComponent
+  ProfileComponent,
+  UserLikedBlogs,
+  MyBlogsComponent
 };
+
+
 

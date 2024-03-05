@@ -1,8 +1,11 @@
 import React from 'react'
+import UserLikedBlogs from '../../components/Dashboard/UserLikedBlogs'
 
 function LikedBlogs() {
   return (
-    <div>LikedBlogs</div>
+    <div>
+      <UserLikedBlogs/>
+    </div>
   )
 }
 

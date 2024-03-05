@@ -22,7 +22,7 @@ import {
   EditBlog,
   LikedBlogs,
   Profile,
-  UserBlogs,
+  MyBlogs,
 } from "./pages";
 import Protected from "./components/AuthLayout.jsx";
 
@@ -114,10 +114,10 @@ const router = createBrowserRouter(
         }
       />
       <Route
-        path="/dashboard/userBlogs"
+        path="/dashboard/MyBlogs"
         element={
           <Protected authentication={true}>
-            <UserBlogs />
+            <MyBlogs />
           </Protected>
         }
       />
