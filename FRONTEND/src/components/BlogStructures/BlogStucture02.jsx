@@ -15,7 +15,7 @@ function BlogStructure({
       className={`w-full h-auto bg-no-repeat bg-left bg-cover p-3 relative ${classNamePrimary}`}
       style={{ backgroundImage: `url(${blog.coverImage.url})` }}
     >
-      <KebabMenu blogId={blog.uuid} userId={blog.author._id}/>
+      {/* <KebabMenu blogId={blog.uuid} userId={blog.author._id}/> */}
       <Link
         to={`/blog/${blog.uuid}`}
 
@@ -39,7 +39,7 @@ function BlogStructure({
           <div className={`text-gray-400 ${classNameText}`}>
             <div
               dangerouslySetInnerHTML={{
-                __html: blog.text?.substring(0, textMaxLength) + "...",
+                __html: blog?.text?.substring(0, textMaxLength) + "...",
               }}
             />
           </div>

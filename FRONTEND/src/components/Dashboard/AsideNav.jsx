@@ -33,7 +33,7 @@ function AsideNav() {
   },[auth])
   return (
     <aside
-      class="sm:h-screen sm:w-1/4 bg-gray-700 dark:bg-slate-800 relative space-y-5"
+      class="sm:h-screen sm:w-1/4 bg-gray-700 dark:bg-slate-800 relative space-y-5 z-50"
       aria-label="Sidebar"
     >
       <div className="flex flex-col justify-center items-center">

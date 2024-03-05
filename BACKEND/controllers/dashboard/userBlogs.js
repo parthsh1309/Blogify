@@ -10,11 +10,9 @@ const getUserBlogs = async(req, res) => {
     .select("blogPosts")
     .populate({
       path: "blogPosts",
-      select: "uuid title description coverImage",
-    })
-      
-      .exec();
-
+      // select: "uuid title description coverImage text",
+      populate: { path: "author", select: "username" },
+    }).exec();
 
     // if blogs are not found
     if (!blogs) {

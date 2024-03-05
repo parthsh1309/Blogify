@@ -2,18 +2,21 @@ import User from "../../models/User.js";
 import { ApiError } from "../../utils/apiError.js";
 import { ApiResponse } from "../../utils/apiResponse.js";
 
-const userLikedBlogs = (req, res) => {
+const userLikedBlogs = async(req, res) => {
   try {
     // get the user details from req
     // get the liked blogs from the database
-    const likedBlogs = User.findById(req.user._id)
+    const likedBlogs =await User.findById(req.user._id)
       .select({
         path: "likedBlogs",
       }).populate({
         path: "likedBlogs",
-        select: "uuid title description coverImage",
+        // select: "uuid title description coverImage",
+        populate: { path: "author", select: "username" },
       })
       .exec();
+
+      console.log(likedBlogs);
     // if liked blogs are not found
     if (!likedBlogs) {
       throw new ApiError(404, "Liked blogs not found");

@@ -1,21 +1,54 @@
-import React from 'react'
-import AsideNav from './AsideNav'
+import React, { useEffect, useState } from "react";
+import AsideNav from "./AsideNav";
+import dashboardService from "../../databaseService/dashboard";
 
 function UserLikedBlogs() {
-  return (
-    <div className='sm:flex space-y-5'>
-        <AsideNav/>
+  const [blogs, setBlogs] = useState([]);
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
 
-        <div className='sm:w-3/4'>
-        <h1 className="sm:text-3xl text-xl text-white font-mont uppercase py-4 text-center w-full">Liked Blogs</h1> 
-        <div className='w-full flex justify-center items-center sm:h-4/5'>
-          <p className='text-center text-white text-5xl'>
-            No Blogs Found
-          </p>
-        </div>
-        </div>
+        const res = await dashboardService.getLikedBlogs();
+        console.log("blogs", res);
+        setBlogs(res.data); // Update the state with blog posts array
+      } catch (error) {
+        console.error("Error fetching user blogs:", error);
+      }
+    };
+
+    // Call the fetchBlogs function
+    fetchBlogs();
+  }, []);
+
+  console.log("blogs", blogs);
+
+  return (
+    <div className="sm:flex space-y-5">
+      <AsideNav />
+
+      <div className="sm:w-3/4 overflow-y-scroll ">
+        <h1 className="sm:text-3xl text-xl text-white font-mont uppercase py-4 text-center w-full">
+          Liked Blogs
+        </h1>
+        {blogs.length ? (
+          <div className="w-full h-full space-y-4 p-3">
+            {blogs.map((blog) => (
+              <BlogStructure02
+                key={blog.uuid}
+                blog={blog}
+                classNameTitle={"text-white sm:text-3xl text-2xl"}
+                classNamePrimary={"rounded-2xl"}
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="w-full flex justify-center items-center sm:h-4/5">
+            <p className="text-center text-white text-5xl">No Blogs Found</p>
+          </div>
+        )}
+      </div>
     </div>
-  )
+  );
 }
 
-export default UserLikedBlogs
+export default UserLikedBlogs;

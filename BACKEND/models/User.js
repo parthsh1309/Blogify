@@ -36,7 +36,7 @@ const userSchema = new Schema({
   likedBlogs: [
     {
       type: mongoose.Schema.ObjectId,
-      ref: "blogs",
+      ref: "blog",
     },
   ],
   refreshToken: {

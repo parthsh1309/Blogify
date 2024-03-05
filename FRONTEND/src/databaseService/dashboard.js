@@ -1,4 +1,5 @@
 import conf from "../conf/conf";
+import axios from "axios";
 
 class DashboardService {
   databaseBaseUrl;
@@ -10,7 +11,7 @@ class DashboardService {
   async getUserBlogs() {
     try {
       const response = await axios.get(
-        `${this.databaseBaseUrl}dashboard/api/v1/getUserBlogs`,
+        `${this.databaseBaseUrl}dashboard/api/v1/getMyBlogs`,
         { withCredentials: true }
       );
       if (response) {
@@ -33,5 +34,5 @@ class DashboardService {
   }
 }
 
-const dashboard = new DashboardService();
-export default dashboard;
+const dashboardService = new DashboardService();
+export default dashboardService;
