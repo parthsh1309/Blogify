@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import AsideNav from "./AsideNav";
 import dashboardService from "../../databaseService/dashboard";
 import { BlogStructure02 } from "..";
+import { useSelector } from "react-redux";
 
 function UserLikedBlogs() {
   const [blogs, setBlogs] = useState([]);
+  const refreshState = useSelector((state) => state.auth.refreshStatus);
+
+
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
@@ -18,7 +22,7 @@ function UserLikedBlogs() {
 
     // Call the fetchBlogs function
     fetchBlogs();
-  }, []);
+  }, [refreshState]);
 
   console.log("blogs", blogs);
 
