@@ -69,11 +69,22 @@ export class AuthService {
         return response.data;
       }
     } catch (error) {
-      console.log(error.response);
       console.log(`authService :: editProfile :: ${error.response.data.error}`);
       return false;
     }
   }  
+
+  async refreshToken() {
+    try {
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/refreshToken`,{},{withCredentials: true});
+      if(response){
+        return response.data;
+      }
+    }catch(error){
+      console.log(`authService :: refreshToken :: ${error.response.data.error}`);
+      return false;
+    }
+  }
 }
 
 const authService = new AuthService();

@@ -9,6 +9,10 @@ import {options} from "../../utils/cookiesOption.js";
 const refreshAccess = async (req, res) => {
   // getting refresh token from cookies
   const incomingRefreshToken = req.cookies.refreshToken;
+  const token = req.cookies.accessToken;
+
+  console.log(token);
+  console.log(incomingRefreshToken);
 
   // if token doesnt exist
   if (!incomingRefreshToken) throw new ApiError(401, "Refresh Token don't Exist");

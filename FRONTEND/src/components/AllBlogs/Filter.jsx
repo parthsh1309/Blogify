@@ -58,7 +58,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
   return (
     <aside
       id="sidebar-multi-level-sidebar"
-      class="h-screen sm:w-1/5 bg-gray-700 dark:bg-gray-900 relative overflow-y-scroll"
+      className="h-screen sm:w-1/5 bg-gray-700 dark:bg-gray-900 relative overflow-y-scroll"
       aria-label="Sidebar"
     >
       <form

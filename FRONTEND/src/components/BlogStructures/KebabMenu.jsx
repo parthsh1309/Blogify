@@ -99,6 +99,7 @@ function KebabMenu({ blogId, userId }) {
                   <button
                     className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
                     onClick={item.function}
+                    key={item.name}
                   >
                     {item.name}
                   </button>
@@ -107,6 +108,7 @@ function KebabMenu({ blogId, userId }) {
                 <button
                   className="block w-full px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white text-left"
                   onClick={item.function}
+                  key={item.name}
                 >
                   {item.name}
                 </button>
