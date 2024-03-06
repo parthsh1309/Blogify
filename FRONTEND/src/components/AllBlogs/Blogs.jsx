@@ -31,7 +31,7 @@ function Blogs({ filterVisible, setFilterVisible, filters, setFilters }) {
 
     // get all blogs from the database and set them to the state
     blogService
-      .getBlogs(false, category, 8, "-createdAt", language, filters.Time)
+      .getBlogs(false, category, 100, "-createdAt", language, filters.Time)
       .then((res) => {
         // console.log(res.data);
         return setBlogs(res.data);

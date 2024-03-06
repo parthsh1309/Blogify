@@ -47,7 +47,7 @@ function Signup() {
   }, []);
 
   return (
-    <div className="h-full flex justify-center items-center p-3">
+    <div className="h-screen flex justify-center items-center p-3">
       <div className="w-full h-auto p-5 flex flex-col gap-4 justify-center md:w-1/3 border border-black dark:border-white rounded-2xl bg-slate-300/20 dark:bg-transparent">
         {/* <Logo/> */}
 

@@ -50,7 +50,10 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
   // submit form
   const { register, handleSubmit } = useForm();
   // submitting the filter data to the parent component
-  const onSubmit = (data) => setFilters(data);
+  const onSubmit = (data) =>{
+    setFilters(data)
+    setFilterVisible(false)
+  }
 
   return (
     <aside
@@ -74,7 +77,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
             </h1>
 
             <span
-              className="material-symbols-outlined p-3 sm:hidden"
+              className="dark:text-white text-black material-symbols-outlined p-3 sm:hidden"
               onClick={() => setFilterVisible(false)}
             >
               close
@@ -86,7 +89,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
               {filterItems.map((item, index) => (
                 <div key={index}>
                   <li
-                    className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer "
+                    className="dark:text-white text-gray-600 flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer "
                     onClick={() => toggleDropdown(index)}
                   >
                     {item.name}
@@ -127,7 +130,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
                 <div className="relative mb-6">
                   <label
                     htmlFor="labels-range-input"
-                    className="text-white flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer"
+                    className="dark:text-white text-slate-500 flex items-center justify-between border border-gray-700 py-3 px-4 rounded-full cursor-pointer"
                   >
                     Read Time
                   </label>
@@ -136,7 +139,7 @@ function Filter({ filterVisible, setFilterVisible, filters, setFilters }) {
                     type="range"
                     min="0"
                     max="60"
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
+                    className="w-full h-2 bg-gray-400 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"
                     {...register("Time")}
                   />
                   <span className="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">

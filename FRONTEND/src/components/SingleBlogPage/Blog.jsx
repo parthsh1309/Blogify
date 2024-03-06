@@ -5,6 +5,7 @@ import LikeBtn from "../Buttons/LikeBtn";
 import DislikeBtn from "../Buttons/DislikeBtn";
 import Comment from "./Comment";
 import MoreBlogs from "./MoreBlogs.jsx";
+import { useSelector } from "react-redux";
 
 function Blog() {
   const { blogId } = useParams();
@@ -19,6 +20,10 @@ function Blog() {
       setLoading(false);
     });
   }, []);
+
+  const authStatus = useSelector((state) => state.auth).status;
+
+
   return loading ? (
     <div>{error.msg} Loading...</div>
   ) : (
@@ -39,7 +44,7 @@ function Blog() {
             <p className="text-xl font-mont">{blog.author.username}</p>
           </Link>
         </div>
-        <img src={blog.coverImage.url} className="w-auto h-auto" alt="" />
+        <img src={blog.coverImage.url} className="w-auto h-auto max-w-80 max-h-80" alt="" />
       </div>
       <hr
         className="border-t border-gray-600 my-4 w-4/5 m-auto
@@ -49,16 +54,18 @@ function Blog() {
         className="blogtext text-white px-6 py-4 space-y-2"
         dangerouslySetInnerHTML={{ __html: blog.text }}
       />
-      <div className="flex ml-auto py-2 px-5 space-x-5">
-        <LikeBtn likes={blog.likes} id={blog.uuid} />
-        <DislikeBtn />
-      </div>
+      {authStatus && (
+        <div className="flex ml-auto py-2 px-5 space-x-5">
+          <LikeBtn likes={blog?.likes} id={blog.uuid} />
+          <DislikeBtn />
+        </div>
+      )}
       <hr
         className="border-t border-gray-600 my-4 w-4/5 m-auto
       "
       />
       <div className="w-full flex flex-wrap sm:justify-around">
-        <Comment uuid={blog.uuid} />
+        <Comment uuid={blog.uuid} authStatus={authStatus} />
         <MoreBlogs Category={blog.category[0]} uuid={blog.uuid} />
       </div>
     </div>

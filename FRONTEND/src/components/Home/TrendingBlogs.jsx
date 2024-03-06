@@ -25,7 +25,7 @@ function TrendingBlogs() {
   }, [refreshState]);
   return (
     <div className="sm:w-1/3">
-      <div className="space-y-2 mb-8">
+      <div className="space-y-2 mb-8 text-neutral-700 dark:text-white">
         <h1 className="text-2xl font-mont font-semibold">Trending</h1>
         <p className="bg-gray-700 w-full " style={{ height: "1px" }}></p>
       </div>
@@ -33,7 +33,7 @@ function TrendingBlogs() {
       <div className="flex flex-wrap gap-3 w-full">
         {blogs.map((blog) => (
           <div key={blog.uuid} >
-            <Link className="h-36 w-full flex gap-3 relative">
+            <Link to={`/blog/${blog.uuid}`} className="h-36 w-full flex gap-3 relative">
               <KebabMenu blogId={blog.uuid} userId={blog.author._id}/>
               <img
                 src={blog.coverImage.url}
@@ -48,14 +48,14 @@ function TrendingBlogs() {
                     (new Date(blog.createdAt).getMonth() +
                       1 +
                       "/" +
-                      new Date(blog.createdAt).getFullYear())}{" "}
+                      new Date(blog.createdAt).getFullYear())}
                   -- {blog.time || '5'} min read
                 </div>
-                <div className="font-semibold font-merri text-lg">{blog.title.substring(0, 14)}...</div>
+                <div className="font-semibold text-black dark:text-white font-merri text-lg ">{blog.title.substring(0, window.innerWidth > 768 ? 50 : 10)}...</div>
                 <div className={`text-gray-400 text-sm`}>
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: blog.text?.substring(0, 30) + "...",
+                    __html: blog.text?.substring(0, window.innerWidth > 768 ? 50 : 20) + "...",
                   }}
                 />
               </div>

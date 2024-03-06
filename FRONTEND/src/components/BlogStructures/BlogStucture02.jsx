@@ -12,7 +12,7 @@ function BlogStructure({
 }) {
   return (
     <div
-      className={`w-full h-auto bg-no-repeat bg-left bg-cover p-3 relative ${classNamePrimary}`}
+      className={`w-full h-auto bg-no-repeat bg-left bg-cover p-3 relative border border-gray-600 rounded-2xl ${classNamePrimary}`}
       style={{ backgroundImage: `url(${blog.coverImage.url})` }}
     >
       <KebabMenu blogId={blog.uuid} userId={blog.author._id}/>
@@ -38,16 +38,17 @@ function BlogStructure({
           </div>
           <div className={`text-gray-400 ${classNameText}`}>
             <div
+             
               dangerouslySetInnerHTML={{
                 __html: blog?.text?.substring(0, textMaxLength) + "...",
               }}
             />
           </div>
           <div className="flex space-x-3 items-center">
-            <span className="dark:text-gray-400 bg-slate-700 py-1 px-3 rounded-full">
+            <span className="text-gray-400 bg-slate-700 py-1 px-3 rounded-full">
               {blog.category[0]}
             </span>
-            <span className="dark:text-gray-500 font-mont font-medium">
+            <span className="text-gray-400 font-mont font-medium text-base">
               by {blog.author.username}
             </span>
           </div>

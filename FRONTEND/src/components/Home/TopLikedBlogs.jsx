@@ -27,7 +27,7 @@ function TopLikedBlogs() {
   ) : blogs.length ? (
     <div className="flex flex-col sm:w-3/5 py-2 sm:px-4 gap-5">
       <div className="space-y-2">
-        <h1 className="text-2xl font-mont font-semibold">What We Love</h1>
+        <h1 className="text-2xl font-mont font-semibold text-neutral-700 dark:text-white">What We Love</h1>
         <p className="bg-gray-700 w-full " style={{ height: "2px" }}></p>
       </div>
 

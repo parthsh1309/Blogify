@@ -4,7 +4,7 @@ import SecondaryBtn from "../Buttons/SecondaryBtn";
 import { useForm } from "react-hook-form";
 import blogService from "../../databaseService/Blog";
 
-function Comment({ uuid }) {
+function Comment({ uuid, authStatus }) {
   const [loading, setLoading] = useState(true);
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
@@ -62,7 +62,7 @@ function Comment({ uuid }) {
                   account_circle
                 </span>
                 <div className="">
-                  <span className="text-sm text-gray-600">
+                  <span className="text-sm text-gray-500">
                     {comment.author.username}
                   </span>
                   <p className="m-auto">{comment.content}</p>
@@ -77,11 +77,12 @@ function Comment({ uuid }) {
             </div>
           )}
         </div>
-        <form onSubmit={handleSubmit(addComment)} className="w-full relative">
+        {authStatus?<form onSubmit={handleSubmit(addComment)} className="w-full relative">
           <FloatingInput
             text="Leave a comment"
             className="py-1"
-            autoComplete="off" // Corrected typo
+            autoComplete="off"
+            readOnly={!authStatus}
             name="content"
             {...register("content")}
           />
@@ -90,7 +91,9 @@ function Comment({ uuid }) {
             className="absolute bottom-2 right-3 top-2 m-auto"
             children
           />
-        </form>
+        </form>: <h1 className="w-full relative text-2xl dark:text-white font-merri font-semibold text-center">
+          Login to add comments
+        </h1>}
       </div>
       
   );

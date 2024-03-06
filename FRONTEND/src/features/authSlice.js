@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Navigate } from "react-router-dom";
 
 export const initialState = {
   userData: null,
   status: false,
-  // for refreshing the blog when user delete or edit something
   refreshStatus: false,
 };
 
@@ -12,18 +10,31 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    login: (state, actions) => {
-      (state.status = true), (state.userData = actions.payload);
+    login: (state, action) => {
+      return {
+        ...state,
+        status: true,
+        userData: action.payload,
+      };
     },
-    editDetails: (state, actions) => {
-      (state.status = true), (state.userData = actions.payload);
+    editDetails: (state, action) => {
+      return {
+        ...state,
+        userData: action.payload,
+      };
     },
-    logout: (state, actions) => {
-      state.status = false;
-      state.userData = null;
+    logout: (state) => {
+      return {
+        ...state,
+        status: false,
+        userData: null,
+      };
     },
-    refresh: (state, actions) => {
-      state.refreshStatus = !state.refreshStatus;
+    refresh: (state) => {
+      return {
+        ...state,
+        refreshStatus: !state.refreshStatus,
+      };
     },
   },
 });

@@ -42,7 +42,7 @@ function Login() {
     }
   }, []);
   return (
-    <div className="w-full h-full flex items-center justify-center p-3">
+    <div className="w-full h-screen flex items-center justify-center p-3">
       <div className="w-full h-auto p-5 flex flex-col gap-4 justify-center md:w-1/3 border border-black dark:border-white rounded-2xl bg-slate-400/20 dark:bg-transparent">
         {/* <Logo/> */}
 
