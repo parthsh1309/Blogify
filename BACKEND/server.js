@@ -18,6 +18,7 @@ const corsOption = {
   origin: "*",
   optionsSuccessStatus: 200,
   credentials: true,
+  allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
    methods: 'GET, POST, PUT, DELETE'
 };
 
