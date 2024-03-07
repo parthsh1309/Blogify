@@ -4,8 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
-import db from "../config/database.js";
-import User from "../models/User.js";
+import db from ".././config/database.js";
+import User from "./../models/User.js";
 
 const app = express();
 dotenv.config({ path: "./config/.env" });
@@ -36,9 +36,9 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 
-import auth from "../routes/auth/auth.js";
-import blog from "../routes/blogs/blog.js";
-import dashboard from "../routes/dashboard/dashboard.js";
+import auth from "./../routes/auth/auth.js";
+import blog from "./../routes/blogs/blog.js";
+import dashboard from "./../routes/dashboard/dashboard.js";
 
 // auth api
 app.use("/auth/api/v1/", auth);
