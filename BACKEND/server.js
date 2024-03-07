@@ -15,15 +15,20 @@ app.use(express.urlencoded({ extended: true, limit: "18kb" }));
 app.use(cookieParser());
 
 const corsOption = {
-  AccessAllowOrigin: "https://blogify-sigma.vercel.app",
   origin: "https://blogify-sigma.vercel.app",
   optionsSuccessStatus: 200,
   credentials: true,
    methods: 'GET, POST, PUT, DELETE'
 };
 
-app.use(cors(corsOption));
+const corsConnect = (res, req)=>{
+  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Origin', 'https://blogify-sigma.vercel.app');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+}
 
+app.use(cors(corsOption));
+app.use(corsConnect);
 const sessionConfig = {
   secret: process.env.SECRET_KEY,
   resave: false,
