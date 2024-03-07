@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Link } from "react-router-dom";
 import { FloatingInput, Logo, PrimaryBtn, SecondaryBtn } from "../index";
 import GoogleBtn from "./GoogleBtn";
-import authService from "../../databaseService/Auth";
+import authService from "../../databaseService/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../../features/authSlice";
 

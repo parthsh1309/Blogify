@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import ThemeSwitch from "./ThemeSwitch";
 import { useSelector } from "react-redux";
-import authService from "../../databaseService/Auth";
+import authService from "../../databaseService/auth";
 import { Link } from "react-router-dom";
 
 function ProfileData({ isProfileOpen, closeProfile }) {

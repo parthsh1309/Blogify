@@ -5,7 +5,7 @@ import conf from "../../conf/conf";
 import { FloatingInput, SelectInput, SecondaryBtn } from "../index";
 import blogService from "../../databaseService/Blog";
 import { useNavigate } from "react-router-dom";
-import authService from "../../databaseService/Auth";
+import authService from "../../databaseService/auth";
 function PostForm({ post }) {
   const [btntext, setBtnText] = useState("Create Blog");
   const [imgUploaded, setImgUploaded] = useState({});

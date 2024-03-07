@@ -5,7 +5,7 @@ import { Footer, Navbar } from "./components";
 import { Outlet } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { login, logout } from "./features/authSlice.js";
-import authService from "./databaseService/Auth.js";
+import authService from "./databaseService/auth.js";
 
 function App() {
   const [loading, setLoading] = useState(true);

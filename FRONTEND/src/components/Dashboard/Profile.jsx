@@ -4,7 +4,7 @@ import FloatingInput from "../Inputs/FloatingInput";
 import SecondaryBtn from "../Buttons/SecondaryBtn";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import authService from "../../databaseService/Auth";
+import authService from "../../databaseService/auth";
 import { editDetails } from "../../features/authSlice";
 
 function Profile() {
