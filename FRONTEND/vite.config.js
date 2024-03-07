@@ -6,9 +6,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   plugins: [react()],
   define: {
-    process.env: {
-      DATABASE_BASE_URL: process.env.DATABASE_BASE_URL,
-      RTE_API_KEY: process.env.RTE_API_KEY,
-    }
+    'process.env.VITE_DATABASE_BASE_URL': JSON.stringify(process.env.VITE_DATABASE_BASE_URL),
+    'process.env.VITE_RTE_API_KEY': JSON.stringify(process.env.VITE_RTE_API_KEY),
   }
 });
