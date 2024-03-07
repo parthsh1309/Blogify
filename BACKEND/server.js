@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true, limit: "18kb" }));
 app.use(cookieParser());
 
 const corsOption = {
-  origin: "http://localhost:5173",
+  origin: "https://blogify-delta.vercel.app/",
   optionsSuccessStatus: 200,
   credentials: true,
 };
