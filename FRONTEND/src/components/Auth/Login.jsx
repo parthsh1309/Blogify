@@ -10,7 +10,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
   const [error, setError] = useState(null);
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
@@ -19,33 +23,37 @@ function Login() {
     try {
       // logging in
       const session = await authService.login(data);
+
       // if login successful
-      
-      if (session.data.success) {
+
+      if (session && session?.data.success) {
         // get the current user and save it to store
         const userData = await authService.getCurrentUser();
         // if there's no current user
         if (!userData) return setError("Userdata not found");
+        console.log(userData);
         // store the user info to store
         dispatch(login(userData));
         navigate("/");
-        
       }
+
+      setError(session.message);
     } catch (error) {
+      console.log(error);
       setError(error.message);
     }
   };
 
+  console.log(errors);
+
   useEffect(() => {
-    if(authStatus === true) {
+    if (authStatus === true) {
       navigate("/");
     }
   }, []);
   return (
     <div className="w-full h-screen flex items-center justify-center p-3">
       <div className="w-full h-auto p-5 flex flex-col gap-4 justify-center md:w-1/3 border border-black dark:border-white rounded-2xl bg-slate-400/20 dark:bg-transparent">
-        {/* <Logo/> */}
-
         <span className="self-center text-3xl font-bold whitespace-nowrap dark:text-white ">
           Login Form
         </span>
@@ -53,18 +61,37 @@ function Login() {
           onSubmit={handleSubmit(submitForm)}
           className="flex flex-col gap-5"
         >
-          <FloatingInput
-            type="email"
-            text="Email"
-            autoComplete="off"
-            {...register("email", { required: true })}
-          />
-          <FloatingInput
-            type="password"
-            text="Password"
-            autoComplete="off"
-            {...register("password", { required: true })}
-          />
+          {error && <p className="text-red-500 text-center w-full">{error}</p>}
+          <div>
+            <FloatingInput
+              type="email"
+              text="Email"
+              autoComplete="off"
+              {...register("email", {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              })}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-base w-full">
+                {errors.email ? "Please Enter Valid Email" : null}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <FloatingInput
+              type="password"
+              text="Password"
+              autoComplete="off"
+              {...register("password", { required: true, minLength: 8})}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-base w-full">
+                {errors.password ? "Password Should Be Atleast 8 and Contain atleast 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character" : null}
+              </p>
+            )}
+          </div>
           <SecondaryBtn
             className="w-auto mx-auto flex justify-center"
             type="submit"

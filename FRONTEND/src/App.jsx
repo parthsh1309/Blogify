@@ -36,7 +36,6 @@ function App() {
     const refreshToken = () => {
       const refreshToken = Cookies.get("refreshToken");
       const accessToken = Cookies.get("accessToken");
-      console.log(refreshToken, accessToken);
       if (refreshToken && !accessToken) {
         authService.refreshToken();
       }

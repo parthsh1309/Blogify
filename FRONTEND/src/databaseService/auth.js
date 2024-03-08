@@ -33,7 +33,7 @@ export class AuthService {
       }
       throw new error("Something Went Wrong");
     } catch (error) {
-      console.log(`authService :: login :: ${error}`);
+      return error.response.data;
     }
   }
 
@@ -44,8 +44,7 @@ export class AuthService {
         return response.data;
       }
     } catch (error) {
-      console.log(`authService :: currentUser :: ${error.response.data.error}`);
-      return false;
+      return  error.response.data;
     }
   }
 
@@ -56,9 +55,7 @@ export class AuthService {
         return response.data;
       }
     } catch (error) {
-      console.log(error.response);
-      console.log(`authService :: logout :: ${error.response.data.error}`);
-      return false;
+      return error.response.data;
     }
   }
 
@@ -69,8 +66,7 @@ export class AuthService {
         return response.data;
       }
     } catch (error) {
-      console.log(`authService :: editProfile :: ${error.response.data.error}`);
-      return false;
+      return error.response.data;
     }
   }  
 
@@ -81,8 +77,7 @@ export class AuthService {
         return response.data;
       }
     }catch(error){
-      console.log(`authService :: refreshToken :: ${error.response.data.error}`);
-      return false;
+      return error.response.data;
     }
   }
 }

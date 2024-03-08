@@ -11,7 +11,7 @@ const loginUser = async (req, res) => {
 
     // if User Dont exist
     if (!user) {
-      return res.status(409).json(new ApiResponse(409, {}, "User Not Found"));
+      return res.status(409).json(new ApiResponse(409, {}, "Username or Email is incorrect"));
     }
 
     // Checking If Password correct
