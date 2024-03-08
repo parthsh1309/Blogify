@@ -63,7 +63,6 @@ function Login() {
             type="password"
             text="Password"
             autoComplete="off"
-            value="12345678"
             {...register("password", { required: true })}
           />
           <SecondaryBtn
