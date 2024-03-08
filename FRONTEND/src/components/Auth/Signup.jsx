@@ -9,13 +9,12 @@ import { login } from "../../features/authSlice";
 
 function Signup() {
   const [error, setError] = useState("");
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const authStatus = useSelector((state) => state.auth.status);
 
   const registerUser = async (data) => {
-
     setError("");
     try {
       // creating the account
@@ -60,24 +59,53 @@ function Signup() {
           onSubmit={handleSubmit(registerUser)}
           className="flex flex-col gap-4"
         >
-          <FloatingInput
-            type="text"
-            text="Username"
-            autoComplete="off"
-            {...register("username", { required: true })}
-          />
-          <FloatingInput
-            type="email"
-            text="Email"
-            autoComplete="off"
-            {...register("email", { required: true })}
-          />
-          <FloatingInput
-            type="password"
-            text="Password"
-            autoComplete="off"
-            {...register("password", { required: true })}
-          />
+          <div>
+            <FloatingInput
+              type="text"
+              text="Username"
+              autoComplete="off"
+              {...register("username", { required: true, minLength: 3 })}
+            />
+            {errors.username && (
+              <p className="text-red-500 text-base w-full">
+                {errors.username ? "Username Should Be Atleast 3 Characters Long" : null}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <FloatingInput
+              type="email"
+              text="Email"
+              autoComplete="off"
+              {...register("email", {
+                required: true,
+                pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+              })}
+            />
+            {errors.email && (
+              <p className="text-red-500 text-base w-full">
+                {errors.email ? "Please Enter Valid Email" : null}
+              </p>
+            )}
+          </div>
+
+          <div>
+            <FloatingInput
+              type="password"
+              text="Password"
+              autoComplete="off"
+              {...register("password", { required: true, minLength: 8 })}
+            />
+            {errors.password && (
+              <p className="text-red-500 text-base w-full">
+                {errors.password
+                  ? "Password Should Be Atleast 8 and Contain atleast 1 Uppercase, 1 Lowercase, 1 Number and 1 Special Character"
+                  : null}
+              </p>
+            )}
+          </div>
+
           <SecondaryBtn
             type="submit"
             className="w-auto mx-auto flex justify-center"
