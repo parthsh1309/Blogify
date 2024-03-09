@@ -9,11 +9,21 @@ export class AuthService {
 
   async createAccount({ username, password, email }) {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/register`, {
-        username,
-        email,
-        password,
-      },{withCredentials: true});
+      const response = await axios.post(
+        `${this.databaseBaseUrl}auth/api/v1/register`,
+        {
+          username,
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
 
       return response.data;
     } catch (error) {
@@ -23,10 +33,20 @@ export class AuthService {
 
   async login({ password, email }) {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/login`, {
-        email,
-        password,
-      },{withCredentials: true,headers: { "Content-Type": "application/json" }});
+      const response = await axios.post(
+        `${this.databaseBaseUrl}auth/api/v1/login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
 
       if (response) {
         return response;
@@ -39,19 +59,38 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const response = await axios.get(`${this.databaseBaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true,headers: { "Content-Type": "application/json" }});
+      const response = await axios.get(
+        `${this.databaseBaseUrl}auth/api/v1/getCurrentUser`,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
       if (response) {
         return response.data;
       }
     } catch (error) {
-      return  error.response.data;
+      return error.response.data;
     }
   }
 
   async logout() {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/logout`,{},{withCredentials: true,headers: { "Content-Type": "application/json" }});
-      if(response){
+      const response = await axios.post(
+        `${this.databaseBaseUrl}auth/api/v1/logout`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      if (response) {
         return response.data;
       }
     } catch (error) {
@@ -61,22 +100,42 @@ export class AuthService {
 
   async editProfile(data) {
     try {
-      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/editProfile`,data,{withCredentials: true ,headers: { "Content-Type": "application/json" }});
-      if(response){
+      const response = await axios.put(
+        `${this.databaseBaseUrl}auth/api/v1/editProfile`,
+        data,
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      if (response) {
         return response.data;
       }
     } catch (error) {
       return error.response.data;
     }
-  }  
+  }
 
   async refreshToken() {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/refreshToken`,{},{withCredentials: true , headers: { "Content-Type": "application/json" }});
-      if(response){
+      const response = await axios.post(
+        `${this.databaseBaseUrl}auth/api/v1/refreshToken`,
+        {},
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+            " Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+      if (response) {
         return response.data;
       }
-    }catch(error){
+    } catch (error) {
       return error.response.data;
     }
   }
@@ -85,4 +144,3 @@ export class AuthService {
 const authService = new AuthService();
 
 export default authService;
-
