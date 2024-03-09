@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: true, limit: "18kb" }));
 app.use(cookieParser());
 
 const corsOption = {
-  origin: "https://blogify-psi.vercel.app/",
+  origin: "https://blogify-psi.vercel.app",
   optionsSuccessStatus: 200,
   credentials: true,
   allowedHeaders: 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
