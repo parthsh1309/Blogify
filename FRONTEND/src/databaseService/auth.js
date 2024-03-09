@@ -26,7 +26,7 @@ export class AuthService {
       const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/login`, {
         email,
         password,
-      },{withCredentials: true});
+      },{withCredentials: true,headers: { "Content-Type": "application/json" }});
 
       if (response) {
         return response;
@@ -39,7 +39,7 @@ export class AuthService {
 
   async getCurrentUser() {
     try {
-      const response = await axios.get(`${this.databaseBaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true});
+      const response = await axios.get(`${this.databaseBaseUrl}auth/api/v1/getCurrentUser`,{withCredentials: true,headers: { "Content-Type": "application/json" }});
       if (response) {
         return response.data;
       }
@@ -50,7 +50,7 @@ export class AuthService {
 
   async logout() {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/logout`,{},{withCredentials: true});
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/logout`,{},{withCredentials: true,headers: { "Content-Type": "application/json" }});
       if(response){
         return response.data;
       }
@@ -61,7 +61,7 @@ export class AuthService {
 
   async editProfile(data) {
     try {
-      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/editProfile`,data,{withCredentials: true});
+      const response = await axios.put(`${this.databaseBaseUrl}auth/api/v1/editProfile`,data,{withCredentials: true ,headers: { "Content-Type": "application/json" }});
       if(response){
         return response.data;
       }
@@ -72,7 +72,7 @@ export class AuthService {
 
   async refreshToken() {
     try {
-      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/refreshToken`,{},{withCredentials: true});
+      const response = await axios.post(`${this.databaseBaseUrl}auth/api/v1/refreshToken`,{},{withCredentials: true , headers: { "Content-Type": "application/json" }});
       if(response){
         return response.data;
       }
@@ -85,3 +85,4 @@ export class AuthService {
 const authService = new AuthService();
 
 export default authService;
+
